@@ -1,0 +1,2763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI × Mermaid | 智能图表的未来</title>
+    
+    <!-- RevealJS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           CSS变量定义 - 方便统一管理主题色
+        ======================================== */
+        :root {
+            /* 主色调 */
+            --primary-color: #257FD5;
+            --secondary-color: #1a5fa6;
+            --accent-color: #FF6B35;
+            --dark-color: #1a202c;
+            --light-color: #f7fafc;
+            
+            /* 渐变色 */
+            --gradient-primary: linear-gradient(135deg, #257FD5 0%, #1a5fa6 100%);
+            --gradient-accent: linear-gradient(135deg, #FF6B35 0%, #FFA07A 100%);
+            --gradient-cool: linear-gradient(135deg, #2EC4B6 0%, #00D4FF 100%);
+            --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-green: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            
+            /* 间距变量 */
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 2.5rem;
+            
+            /* 圆角 */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* 阴影 */
+            --shadow-sm: 0 5px 20px rgba(0,0,0,0.08);
+            --shadow-md: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-lg: 0 15px 50px rgba(0,0,0,0.15);
+            
+            /* 布局尺寸 */
+            --content-max-width: 1200px;
+            --section-padding: 5rem 7rem;
+        }
+        
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        
+        .reveal {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* 移除RevealJS的所有边距 */
+        .reveal .slides {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            left: 0 !important;
+            top: 0 !important;
+        }
+        
+        
+        /* ========================================
+           标题样式
+        ======================================== */
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 700;
+            text-transform: none;
+        }
+        
+        .reveal h1 {
+            font-size: 3.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .reveal h2 {
+            font-size: 2.5em;
+            margin: 0 0 var(--spacing-xl) 0 !important;
+        }
+        
+        .reveal h3 {
+            font-size: 2em;
+            margin: 0 0 var(--spacing-xl) 0 !important;
+        }
+        
+        .reveal h4 {
+            font-size: 1.5em;
+            margin: 0 0 var(--spacing-md) 0;
+        }
+        
+        /* ========================================
+           Section布局样式
+        ======================================== */
+        /* 移除RevealJS的默认变换 */
+        .reveal .slides > section.present {
+            transform: none !important;
+        }
+        
+        .reveal.has-dark-background .slides section.present,
+        .reveal.has-light-background .slides section.present {
+            top: 0 !important;
+        }
+        
+        /* 封面section全屏 */
+        .reveal .slides > section:first-child {
+            width: 100vw !important;
+            height: 100vh !important;
+            left: 0 !important;
+            top: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+        }
+        
+        /* 其他幻灯片布局 */
+        .reveal .slides > section:not(:first-child) {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-direction: column !important;
+            padding: var(--section-padding) !important;
+            box-sizing: border-box !important;
+            width: 100vw !important;
+            min-height: 100vh !important;
+        }
+        
+        .reveal .slides > section:not(:first-child) > * {
+            max-width: var(--content-max-width);
+            width: 100%;
+        }
+        
+        /* ========================================
+           封面样式
+        ======================================== */
+        .cover-slide {
+            background: var(--gradient-primary);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        /* 带背景图片的封面 */
+        .cover-slide-with-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden;
+        }
+        
+        .cover-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .cover-bg-image {
+            position: absolute;
+            width: 100%;
+            /* 使用 cover 确保图片完全覆盖区域，即使图片尺寸不标准 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .cover-bg-top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            /* 上半部分从顶部对齐 */
+            background-position: center top;
+        }
+        
+        .cover-bg-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            /* 下半部分从底部对齐 */
+            background-position: center bottom;
+        }
+        
+        .cover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            /* 使用纯CSS渐变蒙层代替图片，避免图片尺寸问题 */
+            background: rgba(26, 32, 44, 0.75);  /* 深蓝灰色半透明蒙层 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* 确保封面section完全覆盖 */
+        .reveal .slides section:first-child {
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            left: 0 !important;
+            top: 0 !important;
+        }
+        
+        .cover-content {
+            position: absolute;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        .cover-title {
+            font-size: 5em !important;
+            font-weight: 700;
+            margin-bottom: 0.3em;
+            color: #ffffff !important;
+            text-shadow: 3px 3px 12px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .cover-title i {
+            color: #ffffff !important;
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8em;
+            font-weight: 300;
+            color: #ffffff !important;
+            opacity: 0.95;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+        
+        .cover-meta {
+            margin-top: 3em;
+            font-size: 1.2em;
+            color: #ffffff !important;
+            opacity: 0.9;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+        
+        /* ========================================
+           卡片和图标样式
+        ======================================== */
+        /* 基础卡片样式 */
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl) var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 280px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* 卡片变体 - 可用于不同场景 */
+        .card-compact {
+            padding: 1.8rem 1.5rem;
+            min-height: 240px;
+        }
+        
+        .card-left {
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        /* 图标样式 */
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            border-radius: var(--radius-xl);
+            background: var(--gradient-primary);
+            color: white;
+            font-size: 2.2em;
+            margin-bottom: var(--spacing-md);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .icon-box-small {
+            width: 70px;
+            height: 70px;
+            font-size: 1.8em;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* ========================================
+           文字和内容样式
+        ======================================== */
+        /* 渐变文字 */
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xl) !important;
+        }
+        
+        .gradient-text-accent {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        .gradient-text-cool {
+            background: var(--gradient-cool);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        /* 特色框 */
+        .feature-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-sm) 0;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* ========================================
+           动画效果
+        ======================================== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* ========================================
+           列表和文本元素
+        ======================================== */
+        .reveal ul {
+            list-style: none;
+        }
+        
+        .reveal ul li {
+            position: relative;
+            padding-left: 2em;
+            margin-bottom: 1em;
+            line-height: 1.6;
+        }
+        
+        .reveal ul li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 0.9em;
+        }
+        
+        /* 代码块样式 */
+        .reveal pre {
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .reveal code {
+            font-family: 'Courier New', monospace;
+            background: #f7fafc;
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+        }
+        
+        /* 按钮样式 */
+        .btn-primary {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* 进度条样式 */
+        .progress-bar {
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+        
+        /* ========================================
+           Mermaid图表样式
+        ======================================== */
+        .mermaid {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            max-width: 100%;
+            max-height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* Mermaid SVG容器 */
+        .mermaid svg {
+            max-width: 100%;
+            max-height: 60vh;
+            height: auto;
+            width: auto;
+        }
+        
+        /* ========================================
+           布局组件 - 可复用的网格系统
+        ======================================== */
+        /* 2列网格 - 适合对比展示 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-xl) var(--spacing-lg);
+            margin: 0;
+            width: 100%;
+        }
+        
+        /* 3列网格 - 适合功能展示 */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg) var(--spacing-md);
+            margin: 0;
+            width: 100%;
+        }
+        
+        /* 4列网格 - 适合横向菜单 */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin: 0;
+            width: 100%;
+        }
+        
+        /* 自适应网格 - 自动调整列数 */
+        .grid-auto {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin: 0;
+            width: 100%;
+        }
+        
+        /* ========================================
+           通用组件样式
+        ======================================== */
+        /* 标签徽章 */
+        .badge {
+            display: inline-block;
+            padding: 0.4em 1em;
+            border-radius: 20px;
+            background: var(--gradient-primary);
+            color: white;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin: 0.2em;
+        }
+        
+        .badge-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .badge-accent {
+            background: var(--gradient-accent);
+        }
+        
+        .badge-cool {
+            background: var(--gradient-cool);
+        }
+        
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+        
+        /* 引用样式 */
+        .quote {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 5px solid var(--primary-color);
+            padding: 2rem;
+            border-radius: 12px;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .quote::before {
+            content: "\f10d";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2em;
+            color: var(--primary-color);
+            opacity: 0.2;
+        }
+        
+        /* 统计数字 */
+        .stat-number {
+            font-size: 4em;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 1.2em;
+            color: #718096;
+            margin-top: 0.5rem;
+        }
+        
+        /* 代码和渲染对比样式 */
+        .code-render-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            align-items: start;
+            max-height: 65vh;
+        }
+        
+        .code-panel {
+            background: #2d3748;
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-height: 60vh;
+            overflow: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #4a5568 #2d3748;
+        }
+        
+        .code-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .code-panel::-webkit-scrollbar-track {
+            background: #2d3748;
+        }
+        
+        .code-panel::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 3px;
+        }
+        
+        .code-panel h4 {
+            color: #63b3ed;
+            margin-bottom: 1rem;
+            font-size: 1.2em;
+        }
+        
+        .code-panel pre {
+            margin: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+        
+        .code-panel code {
+            color: #e2e8f0;
+            background: transparent;
+            font-size: 0.75em;
+            line-height: 1.6;
+        }
+        
+        .render-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            max-height: 60vh;
+            overflow: hidden;
+        }
+        
+        .render-panel h4 {
+            color: #257FD5;
+            margin-bottom: 1rem;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+        
+        .render-panel .mermaid {
+            box-shadow: none;
+            padding: 0;
+            overflow: hidden;
+            flex: 1;
+        }
+        
+        /* 标签页样式 */
+        .tab-container {
+            margin: 2rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tab-button {
+            padding: 0.8rem 1.5rem;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* 亮点标注 */
+        .highlight-box {
+            background: linear-gradient(135deg, #fef5e7 0%, #fff9e6 100%);
+            border-left: 4px solid #feca57;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .highlight-box i {
+            color: #feca57;
+            margin-right: 0.5rem;
+        }
+        
+        /* 对比表格 */
+        .comparison-table {
+            width: 100%;
+            margin: 2rem 0;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        /* ========================================
+           RevealJS控制器
+        ======================================== */
+        .reveal .controls,
+        .reveal .progress,
+        .reveal .slide-number {
+            z-index: 100 !important;
+        }
+        
+        /* ========================================
+           响应式设计
+        ======================================== */
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 3rem;
+            }
+            
+            .grid-2, .grid-3, .grid-4, .grid-auto {
+                grid-template-columns: 1fr;
+            }
+            
+            .cover-title {
+                font-size: 3em !important;
+            }
+            
+            .cover-subtitle {
+                font-size: 1.3em !important;
+            }
+            
+            .code-render-split {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ========================================
+           工具类 - 快速应用常用样式
+        ======================================== */
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- 封面幻灯片 -->
+            <section>
+                <div class="cover-slide-with-bg">
+                    <!-- 背景图片容器 -->
+                    <div class="cover-bg-container">
+                        <!-- 上半部分背景图 -->
+                        <div class="cover-bg-image cover-bg-top" style="background-image: url('cover_top.png');"></div>
+                        <!-- 下半部分背景图 -->
+                        <div class="cover-bg-image cover-bg-bottom" style="background-image: url('cover_bottom.png');"></div>
+                        <!-- 深色蒙层 - 使用CSS纯色，不使用图片 -->
+                        <div class="cover-overlay"></div>
+                    </div>
+                    
+                    <!-- 文字内容 -->
+                    <div class="cover-content">
+                        <h1 class="cover-title">
+                            AI × Mermaid
+                        </h1>
+                        <p class="cover-subtitle">智能图表生成的革命性突破</p>
+                        <div class="cover-meta">
+                            <i class="fas fa-calendar-alt mr-2"></i> 2025年10月
+                            <span class="mx-4">|</span>
+                            <i class="fas fa-user mr-2"></i> 杨凯
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">
+                    欢迎大家来到今天的演讲。今天我们将探讨AI与Mermaid图表的完美结合。
+                </aside>
+            </section>
+
+            <!-- 目录 -->
+                <section>
+                <h2 class="gradient-text" style="font-size: 2em; margin-bottom: 2rem !important;">
+                    <i class="fas fa-list-ul mr-3"></i>议程
+                </h2>
+                <div class="grid-4">
+                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 240px;">
+                        <div class="icon-box icon-box-small" style="width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">什么是Mermaid？</h3>
+                        <p class="text-gray-600" style="font-size: 0.9em;">文本驱动的图表语言</p>
+                    </div>
+                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 240px;">
+                        <div class="icon-box icon-box-small" style="background: var(--gradient-accent); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">AI的力量</h3>
+                        <p class="text-gray-600" style="font-size: 0.9em;">智能化图表生成</p>
+                    </div>
+                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 240px;">
+                        <div class="icon-box icon-box-small" style="background: var(--gradient-cool); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">实际应用</h3>
+                        <p class="text-gray-600" style="font-size: 0.9em;">行业案例与最佳实践</p>
+                    </div>
+                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 240px;">
+                        <div class="icon-box icon-box-small" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                            <i class="fas fa-crystal-ball"></i>
+                        </div>
+                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">未来展望</h3>
+                        <p class="text-gray-600" style="font-size: 0.9em;">技术趋势与机遇</p>
+                    </div>
+                </div>
+                <aside class="notes">
+                    今天的演讲分为四个主要部分。
+                </aside>
+            </section>
+
+            <!-- 第一部分：什么是Mermaid -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #FF6B35 0%, #FFA07A 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-project-diagram mr-3"></i>什么是 Mermaid？
+                    </h2>
+                    <p class="text-white text-2xl mt-8">简单、强大的文本驱动图表语言</p>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">Mermaid 简介</h3>
+                    <div class="text-left" style="width: 100%;">
+                        <div class="feature-box">
+                            <h4 class="text-xl font-bold mb-3">
+                                <i class="fas fa-code mr-2 text-purple-600"></i>基于文本的图表
+                            </h4>
+                            <p class="text-lg">使用简单的文本语法即可创建复杂的图表和流程图</p>
+                        </div>
+                        <div class="feature-box">
+                            <h4 class="text-xl font-bold mb-3">
+                                <i class="fas fa-sync-alt mr-2 text-purple-600"></i>实时渲染
+                            </h4>
+                            <p class="text-lg">在浏览器中即时渲染，无需额外的工具或软件</p>
+                        </div>
+                        <div class="feature-box">
+                            <h4 class="text-xl font-bold mb-3">
+                                <i class="fas fa-puzzle-piece mr-2 text-purple-600"></i>易于集成
+                            </h4>
+                            <p class="text-lg">可轻松集成到Markdown、文档和网页中</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">Mermaid 支持的图表类型</h3>
+                    <div class="grid-3">
+                        <div class="card text-center">
+                            <i class="fas fa-sitemap text-5xl mb-4" style="color: #257FD5;"></i>
+                            <h4 class="font-bold text-lg">流程图</h4>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-stream text-5xl mb-4" style="color: #FF6B35;"></i>
+                            <h4 class="font-bold text-lg">序列图</h4>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-chart-gantt text-5xl mb-4" style="color: #2EC4B6;"></i>
+                            <h4 class="font-bold text-lg">甘特图</h4>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-circle-nodes text-5xl mb-4" style="color: #43e97b;"></i>
+                            <h4 class="font-bold text-lg">状态图</h4>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-diagram-project text-5xl mb-4" style="color: #fa709a;"></i>
+                            <h4 class="font-bold text-lg">类图</h4>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-chart-pie text-5xl mb-4" style="color: #feca57;"></i>
+                            <h4 class="font-bold text-lg">饼图</h4>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">示例：流程图</h3>
+                    <div class="mermaid">
+                        graph LR
+                            A[开始] --> B{需要AI吗?}
+                            B -->|是| C[使用AI生成]
+                            B -->|否| D[手动编写]
+                            C --> E[自动优化]
+                            D --> E
+                            E --> F[渲染图表]
+                            F --> G[完成]
+                            
+                            style A fill:#257FD5,stroke:#1a5fa6,stroke-width:3px,color:#fff
+                            style G fill:#FF6B35,stroke:#FFA07A,stroke-width:3px,color:#fff
+                            style C fill:#2EC4B6,stroke:#00D4FF,stroke-width:2px,color:#fff
+                    </div>
+                </section>
+                
+                <!-- 新增：代码对比展示 -->
+                <section>
+                    <h3 class="gradient-text mb-4">代码 vs 渲染效果</h3>
+                    <p class="text-lg mb-4">左侧是Mermaid代码，右侧是实时渲染结果</p>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>Mermaid代码</h4>
+                            <pre><code>graph TD
+    A[用户访问] --> B{是否登录?}
+    B -->|是| C[显示首页]
+    B -->|否| D[跳转登录]
+    D --> E[输入账号密码]
+    E --> F{验证成功?}
+    F -->|是| C
+    F -->|否| G[显示错误]
+    G --> E
+    
+    style A fill:#257FD5,color:#fff
+    style C fill:#48bb78,color:#fff
+    style G fill:#f56565,color:#fff</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
+                            <div class="mermaid">
+                                graph TD
+                                    A[用户访问] --> B{是否登录?}
+                                    B -->|是| C[显示首页]
+                                    B -->|否| D[跳转登录]
+                                    D --> E[输入账号密码]
+                                    E --> F{验证成功?}
+                                    F -->|是| C
+                                    F -->|否| G[显示错误]
+                                    G --> E
+                                    
+                                    style A fill:#257FD5,color:#fff
+                                    style C fill:#48bb78,color:#fff
+                                    style G fill:#f56565,color:#fff
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 新增：更多图表类型展示 -->
+                <section>
+                    <h3 class="gradient-text mb-4">类图示例</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code>classDiagram
+    class User {
+        +String name
+        +String email
+        +login()
+        +logout()
+    }
+    class Admin {
+        +String role
+        +manageUsers()
+    }
+    class Post {
+        +String title
+        +String content
+        +publish()
+    }
+    User <|-- Admin
+    User "1" --> "*" Post : creates</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
+                            <div class="mermaid">
+                                classDiagram
+                                    class User {
+                                        +String name
+                                        +String email
+                                        +login()
+                                        +logout()
+                                    }
+                                    class Admin {
+                                        +String role
+                                        +manageUsers()
+                                    }
+                                    class Post {
+                                        +String title
+                                        +String content
+                                        +publish()
+                                    }
+                                    User <|-- Admin
+                                    User "1" --> "*" Post : creates
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 新增：状态图 -->
+                <section>
+                    <h3 class="gradient-text mb-4">状态图示例</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code>stateDiagram-v2
+    [*] --> 草稿
+    草稿 --> 审核中: 提交审核
+    审核中 --> 已发布: 审核通过
+    审核中 --> 草稿: 驳回
+    已发布 --> 已下架: 下架
+    已下架 --> 已发布: 重新上架
+    已发布 --> [*]
+    已下架 --> [*]</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
+                            <div class="mermaid">
+                                stateDiagram-v2
+                                    [*] --> 草稿
+                                    草稿 --> 审核中: 提交审核
+                                    审核中 --> 已发布: 审核通过
+                                    审核中 --> 草稿: 驳回
+                                    已发布 --> 已下架: 下架
+                                    已下架 --> 已发布: 重新上架
+                                    已发布 --> [*]
+                                    已下架 --> [*]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 新增：甘特图 -->
+                <section>
+                    <h3 class="gradient-text mb-4">甘特图示例 - 项目管理</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code style="font-size: 0.65em;">gantt
+    title AI项目开发计划
+    dateFormat YYYY-MM-DD
+    section 需求分析
+    需求收集    :a1, 2025-01-01, 7d
+    需求评审    :after a1, 3d
+    section 设计阶段
+    架构设计    :2025-01-11, 5d
+    UI设计      :2025-01-13, 7d
+    section 开发阶段
+    后端开发    :2025-01-18, 15d
+    前端开发    :2025-01-20, 15d
+    section 测试上线
+    测试        :2025-02-05, 7d
+    上线        :2025-02-12, 2d</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
+                            <div class="mermaid" style="font-size: 0.6em;">
+                                gantt
+                                    title AI项目开发计划
+                                    dateFormat YYYY-MM-DD
+                                    section 需求分析
+                                    需求收集    :a1, 2025-01-01, 7d
+                                    需求评审    :after a1, 3d
+                                    section 设计阶段
+                                    架构设计    :2025-01-11, 5d
+                                    UI设计      :2025-01-13, 7d
+                                    section 开发阶段
+                                    后端开发    :2025-01-18, 15d
+                                    前端开发    :2025-01-20, 15d
+                                    section 测试上线
+                                    测试        :2025-02-05, 7d
+                                    上线        :2025-02-12, 2d
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 新增：饼图 -->
+                <section>
+                    <h3 class="gradient-text mb-4">饼图示例 - 数据统计</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code>pie title 开发时间分配
+    "需求分析" : 15
+    "架构设计" : 20
+    "编码开发" : 40
+    "测试调试" : 15
+    "文档编写" : 10</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
+                            <div class="mermaid">
+                                pie title 开发时间分配
+                                    "需求分析" : 15
+                                    "架构设计" : 20
+                                    "编码开发" : 40
+                                    "测试调试" : 15
+                                    "文档编写" : 10
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 新增：Git图 -->
+                <section>
+                    <h3 class="gradient-text mb-4">Git分支图示例</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code>gitGraph
+    commit
+    commit
+    branch develop
+    checkout develop
+    commit
+    commit
+    checkout main
+    merge develop
+    commit
+    branch feature
+    checkout feature
+    commit
+    checkout develop
+    merge feature
+    checkout main
+    merge develop</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
+                            <div class="mermaid">
+                                gitGraph
+                                    commit
+                                    commit
+                                    branch develop
+                                    checkout develop
+                                    commit
+                                    commit
+                                    checkout main
+                                    merge develop
+                                    commit
+                                    branch feature
+                                    checkout feature
+                                    commit
+                                    checkout develop
+                                    merge feature
+                                    checkout main
+                                    merge develop
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 第二部分：AI的力量 -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #2EC4B6 0%, #00D4FF 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-brain mr-3"></i>AI 赋能 Mermaid
+                    </h2>
+                    <p class="text-white text-2xl mt-8">让图表创建变得更加智能和高效</p>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">AI + Mermaid = 无限可能</h3>
+                    <div class="grid-2 text-left">
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4">
+                                <i class="fas fa-magic mr-2 text-purple-600"></i>传统方式的挑战
+                            </h4>
+                            <ul class="text-lg">
+                                <li>需要学习Mermaid语法</li>
+                                <li>手动编写耗时费力</li>
+                                <li>难以快速迭代修改</li>
+                                <li>复杂图表容易出错</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4">
+                                <i class="fas fa-wand-magic-sparkles mr-2 text-blue-600"></i>AI驱动的优势
+                            </h4>
+                            <ul class="text-lg">
+                                <li>自然语言描述即可生成</li>
+                                <li>秒级生成复杂图表</li>
+                                <li>智能理解业务逻辑</li>
+                                <li>自动优化布局和样式</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">工作流程对比</h3>
+                    <div class="grid-2">
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-4 text-gray-600">
+                                <i class="fas fa-user-edit mr-2"></i>传统流程
+                            </h4>
+                            <div class="timeline text-left">
+                                <div class="timeline-item">
+                                    <strong>步骤 1:</strong> 学习语法
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>步骤 2:</strong> 手动编写代码
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>步骤 3:</strong> 调试错误
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>步骤 4:</strong> 调整样式
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>完成时间:</strong> <span class="gradient-text">30-60分钟</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);">
+                            <h4 class="text-xl font-bold mb-4 text-green-700">
+                                <i class="fas fa-robot mr-2"></i>AI驱动流程
+                            </h4>
+                            <div class="timeline text-left">
+                                <div class="timeline-item">
+                                    <strong>步骤 1:</strong> 描述需求
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>步骤 2:</strong> AI自动生成
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>步骤 3:</strong> 自动优化
+                                </div>
+                                <div class="timeline-item" style="opacity: 0.3;">
+                                    <strong>步骤 4:</strong> -
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>完成时间:</strong> <span class="gradient-text-accent">30秒</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">AI生成示例</h3>
+                    <div class="quote mb-6">
+                        <i class="fas fa-comment-dots mr-2"></i>
+                        "请帮我创建一个用户注册流程的序列图，包括用户、前端、后端和数据库的交互"
+                    </div>
+                    <div class="mermaid" style="font-size: 0.8em;">
+                        sequenceDiagram
+                            participant U as 用户
+                            participant F as 前端
+                            participant B as 后端
+                            participant D as 数据库
+                            
+                            U->>F: 填写注册信息
+                            F->>F: 验证输入格式
+                            F->>B: 提交注册请求
+                            B->>B: 验证数据
+                            B->>D: 检查用户是否存在
+                            D-->>B: 返回查询结果
+                            
+                            alt 用户已存在
+                                B-->>F: 返回错误信息
+                                F-->>U: 显示"用户已存在"
+                            else 用户不存在
+                                B->>D: 创建新用户
+                                D-->>B: 确认创建成功
+                                B->>B: 生成JWT Token
+                                B-->>F: 返回成功及Token
+                                F-->>U: 注册成功，跳转首页
+                            end
+                    </div>
+                </section>
+                
+                <!-- 新增：AI辅助场景 -->
+                <section>
+                    <h3 class="gradient-text mb-6">AI如何理解你的需求</h3>
+                    <div class="grid-2 text-left">
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-4">
+                                <i class="fas fa-brain mr-2" style="color: #257FD5;"></i>自然语言处理
+                            </h4>
+                            <div class="highlight-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <strong>输入：</strong>"画一个电商下单流程"
+                            </div>
+                            <p class="text-gray-600 mt-3">AI自动识别：</p>
+                            <ul class="text-sm mt-2">
+                                <li>图表类型：流程图</li>
+                                <li>业务场景：电商</li>
+                                <li>核心流程：下单</li>
+                                <li>关键节点：商品、购物车、支付、库存</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-4">
+                                <i class="fas fa-magic mr-2" style="color: #FF6B35;"></i>智能补全
+                            </h4>
+                            <div class="highlight-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <strong>AI自动添加：</strong>
+                            </div>
+                            <ul class="text-sm mt-3">
+                                <li>异常处理分支（库存不足、支付失败）</li>
+                                <li>优化节点布局和连接</li>
+                                <li>添加适当的颜色和样式</li>
+                                <li>标注关键业务逻辑</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 新增：电商下单流程示例 -->
+                <section>
+                    <h3 class="gradient-text mb-4">AI生成：电商下单流程</h3>
+                    <div class="mermaid" style="font-size: 0.75em;">
+                        graph TD
+                            A[浏览商品] --> B[加入购物车]
+                            B --> C[查看购物车]
+                            C --> D{确认下单?}
+                            D -->|否| A
+                            D -->|是| E[填写收货信息]
+                            E --> F[选择支付方式]
+                            F --> G{检查库存}
+                            G -->|库存不足| H[显示库存不足]
+                            H --> C
+                            G -->|库存充足| I[锁定库存]
+                            I --> J[发起支付]
+                            J --> K{支付成功?}
+                            K -->|失败| L[释放库存]
+                            L --> C
+                            K -->|成功| M[扣减库存]
+                            M --> N[生成订单]
+                            N --> O[发送通知]
+                            O --> P[订单完成]
+                            
+                            style A fill:#257FD5,stroke:#1a5fa6,color:#fff
+                            style P fill:#48bb78,stroke:#38a169,color:#fff
+                            style H fill:#f56565,stroke:#c53030,color:#fff
+                            style L fill:#f56565,stroke:#c53030,color:#fff
+                            style M fill:#2EC4B6,stroke:#00D4FF,color:#fff
+                    </div>
+                </section>
+                
+                <!-- 新增：复杂系统架构 -->
+                <section>
+                    <h3 class="gradient-text mb-4">AI生成：智能推荐系统架构</h3>
+                    <div class="mermaid" style="font-size: 0.65em;">
+                        graph TB
+                            subgraph 数据采集层
+                                A1[用户行为数据]
+                                A2[商品数据]
+                                A3[交易数据]
+                            end
+                            
+                            subgraph 数据处理层
+                                B1[数据清洗]
+                                B2[特征工程]
+                                B3[数据仓库]
+                            end
+                            
+                            subgraph AI模型层
+                                C1[协同过滤]
+                                C2[深度学习模型]
+                                C3[内容推荐]
+                                C4[实时计算]
+                            end
+                            
+                            subgraph 推荐引擎
+                                D1[策略融合]
+                                D2[排序算法]
+                                D3[结果缓存]
+                            end
+                            
+                            subgraph 应用层
+                                E1[Web端]
+                                E2[移动端]
+                                E3[API服务]
+                            end
+                            
+                            A1 & A2 & A3 --> B1
+                            B1 --> B2
+                            B2 --> B3
+                            B3 --> C1 & C2 & C3
+                            C1 & C2 & C3 --> C4
+                            C4 --> D1
+                            D1 --> D2
+                            D2 --> D3
+                            D3 --> E1 & E2 & E3
+                            
+                            style C1 fill:#257FD5,color:#fff
+                            style C2 fill:#257FD5,color:#fff
+                            style C3 fill:#257FD5,color:#fff
+                            style D1 fill:#FF6B35,color:#fff
+                    </div>
+                </section>
+                
+                <!-- 新增：对比表格 -->
+                <section>
+                    <h3 class="gradient-text mb-6">传统 vs AI驱动：详细对比</h3>
+                    <table class="comparison-table text-left">
+                        <thead>
+                            <tr>
+                                <th>对比维度</th>
+                                <th>传统方式</th>
+                                <th>AI驱动</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>学习曲线</strong></td>
+                                <td>需要1-2周学习语法</td>
+                                <td>即刻上手，自然语言描述</td>
+                            </tr>
+                            <tr>
+                                <td><strong>创建时间</strong></td>
+                                <td>简单图：15-30分钟<br>复杂图：1-2小时</td>
+                                <td>简单图：30秒<br>复杂图：2-5分钟</td>
+                            </tr>
+                            <tr>
+                                <td><strong>错误率</strong></td>
+                                <td>语法错误频繁</td>
+                                <td>AI自动检测和修正</td>
+                            </tr>
+                            <tr>
+                                <td><strong>优化建议</strong></td>
+                                <td>需要手动调整</td>
+                                <td>AI自动优化布局和样式</td>
+                            </tr>
+                            <tr>
+                                <td><strong>迭代修改</strong></td>
+                                <td>手动查找和修改代码</td>
+                                <td>自然语言描述修改需求</td>
+                            </tr>
+                            <tr>
+                                <td><strong>团队协作</strong></td>
+                                <td>需要统一编码规范</td>
+                                <td>AI确保一致性</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+
+            <!-- 第三部分：实际应用 -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #fa709a 0%, #fee140 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-rocket mr-3"></i>实际应用场景
+                    </h2>
+                    <p class="text-white text-2xl mt-8">从理论到实践的完美转化</p>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">应用领域</h3>
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="icon-box">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">软件开发</h4>
+                            <ul class="text-left text-base">
+                                <li>系统架构设计</li>
+                                <li>API接口文档</li>
+                                <li>数据流程图</li>
+                                <li>部署流程图</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="icon-box" style="background: var(--gradient-accent);">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">业务管理</h4>
+                            <ul class="text-left text-base">
+                                <li>业务流程优化</li>
+                                <li>项目管理图表</li>
+                                <li>组织架构图</li>
+                                <li>决策树分析</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="icon-box" style="background: var(--gradient-cool);">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">教育培训</h4>
+                            <ul class="text-left text-base">
+                                <li>课程知识图谱</li>
+                                <li>学习路径规划</li>
+                                <li>概念关系图</li>
+                                <li>教学流程设计</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="icon-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">数据分析</h4>
+                            <ul class="text-left text-base">
+                                <li>数据处理流程</li>
+                                <li>分析模型图</li>
+                                <li>关系网络图</li>
+                                <li>可视化报表</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">案例：微服务架构</h3>
+                    <div class="mermaid" style="font-size: 0.7em;">
+                        graph TB
+                            subgraph 前端层
+                                Web[Web应用]
+                                Mobile[移动应用]
+                            end
+                            
+                            subgraph API网关
+                                Gateway[API Gateway]
+                            end
+                            
+                            subgraph 微服务层
+                                Auth[认证服务]
+                                User[用户服务]
+                                Order[订单服务]
+                                Payment[支付服务]
+                                Notification[通知服务]
+                            end
+                            
+                            subgraph 数据层
+                                UserDB[(用户数据库)]
+                                OrderDB[(订单数据库)]
+                                Cache[(Redis缓存)]
+                            end
+                            
+                            subgraph 消息队列
+                                MQ[RabbitMQ]
+                            end
+                            
+                            Web --> Gateway
+                            Mobile --> Gateway
+                            Gateway --> Auth
+                            Gateway --> User
+                            Gateway --> Order
+                            Gateway --> Payment
+                            
+                            User --> UserDB
+                            Order --> OrderDB
+                            Auth --> Cache
+                            
+                            Payment --> MQ
+                            MQ --> Notification
+                            
+                            style Gateway fill:#257FD5,stroke:#1a5fa6,stroke-width:3px,color:#fff
+                            style Auth fill:#FF6B35,stroke:#FFA07A,stroke-width:2px,color:#fff
+                            style MQ fill:#2EC4B6,stroke:#00D4FF,stroke-width:2px,color:#fff
+                    </div>
+                </section>
+                
+                <!-- 新增：机器学习流程 -->
+                <section>
+                    <h3 class="gradient-text mb-4">场景：机器学习模型训练流程</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>Mermaid代码</h4>
+                            <pre><code style="font-size: 0.65em;">graph LR
+    A[原始数据] --> B[数据清洗]
+    B --> C[特征工程]
+    C --> D[数据划分]
+    D --> E[训练集]
+    D --> F[验证集]
+    D --> G[测试集]
+    E --> H[模型训练]
+    F --> H
+    H --> I{模型评估}
+    I -->|不满意| J[调整参数]
+    J --> H
+    I -->|满意| K[模型部署]
+    G --> L[最终测试]
+    K --> L
+    L --> M[生产环境]</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>渲染效果</h4>
+                            <div class="mermaid" style="font-size: 0.75em;">
+                                graph LR
+                                    A[原始数据] --> B[数据清洗]
+                                    B --> C[特征工程]
+                                    C --> D[数据划分]
+                                    D --> E[训练集]
+                                    D --> F[验证集]
+                                    D --> G[测试集]
+                                    E --> H[模型训练]
+                                    F --> H
+                                    H --> I{模型评估}
+                                    I -->|不满意| J[调整参数]
+                                    J --> H
+                                    I -->|满意| K[模型部署]
+                                    G --> L[最终测试]
+                                    K --> L
+                                    L --> M[生产环境]
+                                    
+                                    style A fill:#257FD5,color:#fff
+                                    style M fill:#48bb78,color:#fff
+                                    style H fill:#FF6B35,color:#fff
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 新增：数据库设计ER图 -->
+                <section>
+                    <h3 class="gradient-text mb-4">场景：博客系统ER图</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码示例</h4>
+                            <pre><code style="font-size: 0.6em;">erDiagram
+    USER ||--o{ POST : writes
+    USER ||--o{ COMMENT : makes
+    POST ||--o{ COMMENT : has
+    POST }o--|| CATEGORY : belongs_to
+    POST }o--o{ TAG : has
+    
+    USER {
+        int id PK
+        string username
+        string email
+        datetime created_at
+    }
+    POST {
+        int id PK
+        int user_id FK
+        string title
+        text content
+        datetime published_at
+    }
+    COMMENT {
+        int id PK
+        int user_id FK
+        int post_id FK
+        text content
+    }</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>渲染效果</h4>
+                            <div class="mermaid" style="font-size: 0.65em;">
+                                erDiagram
+                                    USER ||--o{ POST : writes
+                                    USER ||--o{ COMMENT : makes
+                                    POST ||--o{ COMMENT : has
+                                    POST }o--|| CATEGORY : belongs_to
+                                    POST }o--o{ TAG : has
+                                    
+                                    USER {
+                                        int id PK
+                                        string username
+                                        string email
+                                        datetime created_at
+                                    }
+                                    POST {
+                                        int id PK
+                                        int user_id FK
+                                        string title
+                                        text content
+                                        datetime published_at
+                                    }
+                                    COMMENT {
+                                        int id PK
+                                        int user_id FK
+                                        int post_id FK
+                                        text content
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 新增：用户旅程图 -->
+                <section>
+                    <h3 class="gradient-text mb-4">场景：用户旅程图</h3>
+                    <div class="mermaid" style="font-size: 0.7em;">
+                        journey
+                            title 用户购买产品的完整旅程
+                            section 认知阶段
+                              看到广告: 3: 用户
+                              访问网站: 4: 用户
+                              浏览产品: 5: 用户
+                            section 考虑阶段
+                              对比价格: 4: 用户
+                              查看评价: 5: 用户
+                              咨询客服: 3: 用户, 客服
+                            section 购买阶段
+                              加入购物车: 5: 用户
+                              填写信息: 4: 用户
+                              完成支付: 5: 用户, 系统
+                            section 使用阶段
+                              收到商品: 5: 用户
+                              使用产品: 5: 用户
+                              撰写评价: 4: 用户
+                    </div>
+                </section>
+                
+                <!-- 新增：思维导图 -->
+                <section>
+                    <h3 class="gradient-text mb-4">场景：产品功能规划思维导图</h3>
+                    <div class="mermaid" style="font-size: 0.65em;">
+                        mindmap
+                          root((AI图表生成平台))
+                            核心功能
+                              自然语言输入
+                              智能图表生成
+                              实时预览
+                              一键导出
+                            技术架构
+                              前端
+                                React
+                                TypeScript
+                                TailwindCSS
+                              后端
+                                Node.js
+                                Python
+                                AI模型
+                              数据库
+                                MongoDB
+                                Redis
+                            用户体验
+                              简洁界面
+                              快速响应
+                              多端适配
+                              离线支持
+                            商业模式
+                              免费版
+                              专业版
+                              企业版
+                              API服务
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">效率提升统计</h3>
+                    <div class="grid-3">
+                        <div class="text-center">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">
+                                <i class="fas fa-clock mr-2"></i>时间节省
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="stat-number">10x</div>
+                            <div class="stat-label">
+                                <i class="fas fa-tachometer-alt mr-2"></i>生产力提升
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="stat-number">80%</div>
+                            <div class="stat-label">
+                                <i class="fas fa-bug mr-2"></i>错误减少
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-4">
+                                <i class="fas fa-users mr-2 text-purple-600"></i>来自用户的反馈
+                            </h4>
+                            <div class="quote">
+                                "使用AI生成Mermaid图表后，我们团队的文档质量显著提升，沟通效率提高了至少3倍。这是一个改变游戏规则的工具！"
+                                <div class="text-right mt-3 text-base">
+                                    <strong>— 某互联网公司技术总监</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 第四部分：技术实现 -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #257FD5 0%, #1a5fa6 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-cogs mr-3"></i>技术实现
+                    </h2>
+                    <p class="text-white text-2xl mt-8">深入了解背后的技术栈</p>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">技术架构</h3>
+                    <div class="mermaid">
+                        graph LR
+                            A[自然语言输入] --> B[NLP处理]
+                            B --> C[语义理解]
+                            C --> D[结构分析]
+                            D --> E[Mermaid语法生成]
+                            E --> F[语法优化]
+                            F --> G[样式美化]
+                            G --> H[渲染输出]
+                            
+                            style A fill:#257FD5,stroke:#1a5fa6,stroke-width:3px,color:#fff
+                            style D fill:#FF6B35,stroke:#FFA07A,stroke-width:2px,color:#fff
+                            style H fill:#2EC4B6,stroke:#00D4FF,stroke-width:3px,color:#fff
+                    </div>
+                    <div class="mt-6 grid-2">
+                        <div class="card">
+                            <h4 class="font-bold mb-2">
+                                <i class="fas fa-brain mr-2 text-purple-600"></i>AI模型
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">GPT-4</span>
+                                <span class="badge">Claude</span>
+                                <span class="badge">自定义模型</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h4 class="font-bold mb-2">
+                                <i class="fas fa-code mr-2 text-blue-600"></i>技术栈
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">JavaScript</span>
+                                <span class="badge">Node.js</span>
+                                <span class="badge">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">集成方式</h3>
+                    <div class="grid-2 text-left">
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-4">
+                                <i class="fas fa-plug mr-2" style="color: #257FD5;"></i>API调用
+                            </h4>
+                            <pre style="font-size: 0.6em;"><code class="language-javascript">// 调用AI生成API
+const response = await fetch('/api/generate', {
+  method: 'POST',
+  body: JSON.stringify({
+    prompt: '创建用户登录流程图',
+    type: 'flowchart'
+  })
+});
+
+const mermaidCode = await response.json();
+console.log(mermaidCode);
+</code></pre>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-4">
+                                <i class="fas fa-terminal mr-2" style="color: #FF6B35;"></i>命令行工具
+                            </h4>
+                            <pre style="font-size: 0.6em;"><code class="language-bash"># 使用CLI工具生成
+$ ai-mermaid generate \
+  --input "创建电商购物流程" \
+  --type "flowchart" \
+  --output "shopping.mmd"
+
+# 直接渲染
+$ ai-mermaid render \
+  --file shopping.mmd \
+  --format svg
+</code></pre>
+                        </div>
+                    </div>
+                    <div class="mt-6 card">
+                        <h4 class="text-xl font-bold mb-4">
+                            <i class="fas fa-puzzle-piece mr-2" style="color: #2EC4B6;"></i>编辑器插件
+                        </h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="badge-outline">VS Code</span>
+                            <span class="badge-outline">IntelliJ IDEA</span>
+                            <span class="badge-outline">Sublime Text</span>
+                            <span class="badge-outline">Atom</span>
+                            <span class="badge-outline">Vim/Neovim</span>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 第五部分：最佳实践 -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-star mr-3"></i>最佳实践
+                    </h2>
+                    <p class="text-white text-2xl mt-8">让AI生成的图表更加出色</p>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">如何写好提示词</h3>
+                    <div class="grid-2">
+                        <div class="card" style="background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);">
+                            <h4 class="text-xl font-bold mb-4 text-red-700">
+                                <i class="fas fa-times-circle mr-2"></i>不好的示例
+                            </h4>
+                            <div class="quote" style="background: white; border-color: #fc8181;">
+                                "画一个流程图"
+                            </div>
+                            <p class="mt-4 text-sm text-gray-600">
+                                <i class="fas fa-info-circle mr-2"></i>太模糊，缺少细节
+                            </p>
+                        </div>
+                        <div class="card" style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);">
+                            <h4 class="text-xl font-bold mb-4 text-green-700">
+                                <i class="fas fa-check-circle mr-2"></i>好的示例
+                            </h4>
+                            <div class="quote" style="background: white; border-color: #48bb78;">
+                                "创建一个电商订单处理流程图，包含：下单、支付、库存检查、发货、物流跟踪、确认收货这几个步骤，使用决策节点处理支付失败和库存不足的情况"
+                            </div>
+                            <p class="mt-4 text-sm text-gray-600">
+                                <i class="fas fa-info-circle mr-2"></i>清晰、具体、结构化
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">提示词模板</h3>
+                    <div class="text-left">
+                        <div class="card mb-4">
+                            <h4 class="font-bold text-lg mb-3">
+                                <i class="fas fa-1 mr-2" style="color: #257FD5;"></i>明确图表类型
+                            </h4>
+                            <p class="text-gray-600">指定需要的图表类型：流程图、序列图、类图、状态图等</p>
+                            <div class="mt-2 text-sm">
+                                <span class="badge">流程图</span>
+                                <span class="badge">序列图</span>
+                                <span class="badge">甘特图</span>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <h4 class="font-bold text-lg mb-3">
+                                <i class="fas fa-2 mr-2" style="color: #FF6B35;"></i>描述核心要素
+                            </h4>
+                            <p class="text-gray-600">列出所有需要包含的实体、步骤或组件</p>
+                        </div>
+                        <div class="card mb-4">
+                            <h4 class="font-bold text-lg mb-3">
+                                <i class="fas fa-3 mr-2" style="color: #2EC4B6;"></i>说明关系和逻辑
+                            </h4>
+                            <p class="text-gray-600">明确元素之间的关系、流程走向和条件判断</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="font-bold text-lg mb-3">
+                                <i class="fas fa-4 mr-2" style="color: #43e97b;"></i>添加样式偏好
+                            </h4>
+                            <p class="text-gray-600">可选：指定颜色方案、布局方向等视觉偏好</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">优化技巧</h3>
+                    <div class="grid-3">
+                        <div class="card text-center">
+                            <i class="fas fa-compress text-4xl mb-3" style="color: #257FD5;"></i>
+                            <h4 class="font-bold mb-2">保持简洁</h4>
+                            <p class="text-sm text-gray-600">每个图表聚焦一个主题</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-layer-group text-4xl mb-3" style="color: #FF6B35;"></i>
+                            <h4 class="font-bold mb-2">分层展示</h4>
+                            <p class="text-sm text-gray-600">使用子图组织复杂内容</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-palette text-4xl mb-3" style="color: #2EC4B6;"></i>
+                            <h4 class="font-bold mb-2">统一风格</h4>
+                            <p class="text-sm text-gray-600">保持配色和样式一致性</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-tag text-4xl mb-3" style="color: #43e97b;"></i>
+                            <h4 class="font-bold mb-2">清晰标注</h4>
+                            <p class="text-sm text-gray-600">使用有意义的标签和注释</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-arrows-alt text-4xl mb-3" style="color: #fa709a;"></i>
+                            <h4 class="font-bold mb-2">合理布局</h4>
+                            <p class="text-sm text-gray-600">控制节点间距和方向</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-sync-alt text-4xl mb-3" style="color: #feca57;"></i>
+                            <h4 class="font-bold mb-2">迭代改进</h4>
+                            <p class="text-sm text-gray-600">不断优化直到满意</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- 新增：Mermaid高级技巧 -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #feca57 0%, #ff6b6b 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-magic mr-3"></i>Mermaid 高级技巧
+                    </h2>
+                    <p class="text-white text-2xl mt-8">让你的图表更加专业和美观</p>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">技巧1：自定义样式</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code style="font-size: 0.65em;">%%{init: {'theme':'base', 'themeVariables': {
+  'primaryColor':'#257FD5',
+  'primaryTextColor':'#fff',
+  'primaryBorderColor':'#1a5fa6',
+  'lineColor':'#257FD5',
+  'secondaryColor':'#FF6B35',
+  'tertiaryColor':'#2EC4B6'
+}}}%%
+
+graph TD
+    A[开始] --> B[处理]
+    B --> C[结束]
+    
+    classDef customStyle fill:#257FD5,stroke:#1a5fa6,color:#fff
+    class A,B,C customStyle</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>效果</h4>
+                            <div class="mermaid">
+                                graph TD
+                                    A[开始] --> B[处理]
+                                    B --> C[结束]
+                                    
+                                    style A fill:#257FD5,stroke:#1a5fa6,stroke-width:3px,color:#fff
+                                    style B fill:#FF6B35,stroke:#FFA07A,stroke-width:3px,color:#fff
+                                    style C fill:#2EC4B6,stroke:#00D4FF,stroke-width:3px,color:#fff
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">技巧2：节点形状变化</h3>
+                    <div class="mermaid" style="font-size: 0.8em;">
+                        graph LR
+                            A[方形节点]
+                            B(圆角矩形)
+                            C([体育场形])
+                            D[[子程序]]
+                            E[(数据库)]
+                            F((圆形))
+                            G>不对称形]
+                            H{菱形}
+                            I{{六边形}}
+                            J[/平行四边形/]
+                            K[\平行四边形\]
+                            L[/梯形\]
+                            
+                            A --> B --> C --> D
+                            E --> F --> G --> H
+                            I --> J --> K --> L
+                            
+                            style A fill:#257FD5,color:#fff
+                            style B fill:#FF6B35,color:#fff
+                            style C fill:#2EC4B6,color:#fff
+                            style D fill:#43e97b,color:#fff
+                            style E fill:#fa709a,color:#fff
+                            style F fill:#feca57,color:#fff
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-sm text-gray-600">通过不同形状的节点，可以表达不同的含义和层级关系</p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">技巧3：子图与分组</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code style="font-size: 0.6em;">graph TB
+    subgraph 客户端
+        A[Web浏览器]
+        B[移动App]
+    end
+    
+    subgraph 服务端
+        C[负载均衡]
+        subgraph 应用层
+            D[应用服务器1]
+            E[应用服务器2]
+        end
+        F[(数据库)]
+    end
+    
+    A & B --> C
+    C --> D & E
+    D & E --> F</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>效果</h4>
+                            <div class="mermaid" style="font-size: 0.7em;">
+                                graph TB
+                                    subgraph 客户端
+                                        A[Web浏览器]
+                                        B[移动App]
+                                    end
+                                    
+                                    subgraph 服务端
+                                        C[负载均衡]
+                                        subgraph 应用层
+                                            D[应用服务器1]
+                                            E[应用服务器2]
+                                        end
+                                        F[(数据库)]
+                                    end
+                                    
+                                    A & B --> C
+                                    C --> D & E
+                                    D & E --> F
+                                    
+                                    style C fill:#257FD5,color:#fff
+                                    style F fill:#FF6B35,color:#fff
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">技巧4：交互式链接</h3>
+                    <div class="highlight-box mb-4">
+                        <i class="fas fa-info-circle"></i>
+                        Mermaid支持为节点添加点击事件和链接
+                    </div>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code style="font-size: 0.65em;">graph LR
+    A[GitHub]
+    B[文档]
+    C[示例]
+    
+    A --> B
+    B --> C
+    
+    click A "https://github.com" "访问GitHub"
+    click B "https://docs.com" "查看文档"
+    click C "https://examples.com" "查看示例"</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>说明</h4>
+                            <p class="text-sm text-gray-600 mt-3">
+                                通过 <code>click</code> 语法，可以为节点添加：
+                            </p>
+                            <ul class="text-sm mt-2">
+                                <li>外部链接</li>
+                                <li>JavaScript回调函数</li>
+                                <li>提示文本</li>
+                                <li>新窗口打开</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">技巧5：图标集成</h3>
+                    <div class="mermaid" style="font-size: 0.8em;">
+                        graph LR
+                            A["🚀 启动项目"] --> B["⚙️ 配置环境"]
+                            B --> C["💻 编写代码"]
+                            C --> D["🧪 运行测试"]
+                            D --> E{"✅ 测试通过?"}
+                            E -->|否| C
+                            E -->|是| F["📦 构建部署"]
+                            F --> G["🎉 上线完成"]
+                            
+                            style A fill:#257FD5,color:#fff
+                            style G fill:#48bb78,color:#fff
+                            style D fill:#2EC4B6,color:#fff
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-sm text-gray-600">在节点文本中直接使用Emoji表情，让图表更加生动</p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">技巧6：序列图高级特性</h3>
+                    <div class="code-render-split">
+                        <div class="code-panel">
+                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
+                            <pre><code style="font-size: 0.6em;">sequenceDiagram
+    autonumber
+    actor U as 用户
+    participant S as 系统
+    
+    rect rgb(200, 220, 240)
+    note right of U: 认证阶段
+    U->>S: 登录请求
+    activate S
+    S-->>U: 返回Token
+    deactivate S
+    end
+    
+    rect rgb(220, 240, 200)
+    note right of U: 业务操作
+    loop 每日任务
+        U->>S: 执行操作
+        S-->>U: 返回结果
+    end
+    end</code></pre>
+                        </div>
+                        <div class="render-panel">
+                            <h4><i class="fas fa-eye mr-2"></i>效果</h4>
+                            <div class="mermaid" style="font-size: 0.65em;">
+                                sequenceDiagram
+                                    autonumber
+                                    actor U as 用户
+                                    participant S as 系统
+                                    
+                                    rect rgb(200, 220, 240)
+                                    note right of U: 认证阶段
+                                    U->>S: 登录请求
+                                    activate S
+                                    S-->>U: 返回Token
+                                    deactivate S
+                                    end
+                                    
+                                    rect rgb(220, 240, 200)
+                                    note right of U: 业务操作
+                                    loop 每日任务
+                                        U->>S: 执行操作
+                                        S-->>U: 返回结果
+                                    end
+                                    end
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">Mermaid图表类型汇总</h3>
+                    <div class="grid-3">
+                        <div class="card text-center">
+                            <i class="fas fa-project-diagram text-4xl mb-3" style="color: #257FD5;"></i>
+                            <h4 class="font-bold">流程图</h4>
+                            <p class="text-sm text-gray-600">graph/flowchart</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-exchange-alt text-4xl mb-3" style="color: #FF6B35;"></i>
+                            <h4 class="font-bold">序列图</h4>
+                            <p class="text-sm text-gray-600">sequenceDiagram</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-diagram-project text-4xl mb-3" style="color: #2EC4B6;"></i>
+                            <h4 class="font-bold">类图</h4>
+                            <p class="text-sm text-gray-600">classDiagram</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-circle-nodes text-4xl mb-3" style="color: #43e97b;"></i>
+                            <h4 class="font-bold">状态图</h4>
+                            <p class="text-sm text-gray-600">stateDiagram</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-table text-4xl mb-3" style="color: #fa709a;"></i>
+                            <h4 class="font-bold">ER图</h4>
+                            <p class="text-sm text-gray-600">erDiagram</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-chart-gantt text-4xl mb-3" style="color: #feca57;"></i>
+                            <h4 class="font-bold">甘特图</h4>
+                            <p class="text-sm text-gray-600">gantt</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-chart-pie text-4xl mb-3" style="color: #257FD5;"></i>
+                            <h4 class="font-bold">饼图</h4>
+                            <p class="text-sm text-gray-600">pie</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-code-branch text-4xl mb-3" style="color: #FF6B35;"></i>
+                            <h4 class="font-bold">Git图</h4>
+                            <p class="text-sm text-gray-600">gitGraph</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-brain text-4xl mb-3" style="color: #2EC4B6;"></i>
+                            <h4 class="font-bold">思维导图</h4>
+                            <p class="text-sm text-gray-600">mindmap</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-route text-4xl mb-3" style="color: #43e97b;"></i>
+                            <h4 class="font-bold">用户旅程</h4>
+                            <p class="text-sm text-gray-600">journey</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-timeline text-4xl mb-3" style="color: #fa709a;"></i>
+                            <h4 class="font-bold">时间线</h4>
+                            <p class="text-sm text-gray-600">timeline</p>
+                        </div>
+                        <div class="card text-center">
+                            <i class="fas fa-vector-square text-4xl mb-3" style="color: #feca57;"></i>
+                            <h4 class="font-bold">象限图</h4>
+                            <p class="text-sm text-gray-600">quadrantChart</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 第六部分：未来展望 -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #257FD5 0%, #1a5fa6 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-rocket mr-3"></i>未来展望
+                    </h2>
+                    <p class="text-white text-2xl mt-8">技术演进与无限可能</p>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">技术发展趋势</h3>
+                    <div class="mermaid">
+                        timeline
+                            title AI × Mermaid 发展路线图
+                            
+                            2024 : 基础集成
+                                : 简单图表生成
+                                : 命令行工具
+                            
+                            2025 : 智能优化
+                                : 自动布局优化
+                                : 多语言支持
+                                : 实时协作
+                            
+                            2026 : 深度融合
+                                : 语音生成图表
+                                : AR/VR可视化
+                                : 自动化文档
+                            
+                            2027+ : 未来愿景
+                                : AGI驱动设计
+                                : 思维导图生成
+                                : 跨平台无缝集成
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">即将到来的功能</h3>
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="icon-box">
+                                <i class="fas fa-wand-magic-sparkles"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">智能建议</h4>
+                            <p class="text-gray-600 mb-3">AI主动分析内容，提出图表改进建议</p>
+                            <span class="badge">2025 Q1</span>
+                        </div>
+                        <div class="card">
+                            <div class="icon-box" style="background: var(--gradient-accent);">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">实时协作</h4>
+                            <p class="text-gray-600 mb-3">多人同时编辑，AI辅助冲突解决</p>
+                            <span class="badge">2025 Q2</span>
+                        </div>
+                        <div class="card">
+                            <div class="icon-box" style="background: var(--gradient-cool);">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">语音输入</h4>
+                            <p class="text-gray-600 mb-3">通过语音描述直接生成图表</p>
+                            <span class="badge">2025 Q3</span>
+                        </div>
+                        <div class="card">
+                            <div class="icon-box" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <i class="fas fa-file-export"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">多格式导出</h4>
+                            <p class="text-gray-600 mb-3">支持PDF、PNG、SVG等多种格式</p>
+                            <span class="badge">2025 Q4</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-6">影响力与机遇</h3>
+                    <div class="grid-2 text-left">
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4">
+                                <i class="fas fa-globe mr-2" style="color: #257FD5;"></i>行业影响
+                            </h4>
+                            <ul class="text-lg">
+                                <li>降低可视化创作门槛</li>
+                                <li>提升团队协作效率</li>
+                                <li>促进知识传播和分享</li>
+                                <li>推动文档标准化</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4">
+                                <i class="fas fa-lightbulb mr-2" style="color: #FF6B35;"></i>创新机遇
+                            </h4>
+                            <ul class="text-lg">
+                                <li>教育科技应用</li>
+                                <li>企业数字化转型</li>
+                                <li>开发者工具生态</li>
+                                <li>AI辅助设计平台</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="card" style="background: var(--gradient-primary); color: white;">
+                            <h4 class="text-2xl font-bold mb-4">
+                                <i class="fas fa-trophy mr-2"></i>核心价值主张
+                            </h4>
+                            <p class="text-xl">
+                                通过AI技术让每个人都能轻松创建专业级别的图表，<br>
+                                打破技术壁垒，释放创造力，提升沟通效率。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 总结 -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #FF6B35 0%, #FFA07A 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-flag-checkered mr-3"></i>总结回顾
+                    </h2>
+                </section>
+                
+                <section>
+                    <h3 class="gradient-text mb-8">关键要点</h3>
+                    <div class="grid-2 text-left">
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-3">
+                                <span class="text-4xl mr-3" style="color: #257FD5;">01</span>
+                                Mermaid的价值
+                            </h4>
+                            <p class="text-gray-600">简单、强大的文本驱动图表语言，易于集成和维护</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-3">
+                                <span class="text-4xl mr-3" style="color: #FF6B35;">02</span>
+                                AI的赋能
+                            </h4>
+                            <p class="text-gray-600">大幅降低创作门槛，提升效率和质量</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-3">
+                                <span class="text-4xl mr-3" style="color: #2EC4B6;">03</span>
+                                广泛应用
+                            </h4>
+                            <p class="text-gray-600">从软件开发到业务管理，覆盖多个领域</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-xl font-bold mb-3">
+                                <span class="text-4xl mr-3" style="color: #43e97b;">04</span>
+                                光明前景
+                            </h4>
+                            <p class="text-gray-600">持续创新，未来充满无限可能</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 结束页 -->
+            <section data-background-gradient="linear-gradient(135deg, #257FD5 0%, #1a5fa6 100%)">
+                <div class="text-center text-white">
+                    <h2 class="text-6xl font-bold mb-6">感谢观看</h2>
+                    <p class="text-3xl mb-8">Questions & Answers</p>
+                    <div class="text-xl">
+                        <i class="fas fa-envelope mr-3"></i>联系方式
+                        <p class="mt-3 opacity-90">欢迎交流与合作</p>
+                    </div>
+                    <div class="mt-12">
+                        <i class="fas fa-heart text-5xl animate-pulse" style="color: #FF6B35;"></i>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    
+    <!-- RevealJS -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    
+    <script>
+        // 检查 Mermaid 是否加载成功
+        if (typeof mermaid === 'undefined') {
+            console.error('Mermaid 未能成功加载！请检查网络连接。');
+            document.body.insertAdjacentHTML('afterbegin', 
+                '<div style="position:fixed;top:0;left:0;right:0;background:#f56565;color:white;padding:10px;text-align:center;z-index:9999;">⚠️ Mermaid库加载失败，请检查网络连接后刷新页面</div>'
+            );
+        }
+        
+        // 初始化 Mermaid
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#257FD5',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#1a5fa6',
+                lineColor: '#257FD5',
+                secondaryColor: '#FF6B35',
+                tertiaryColor: '#2EC4B6',
+            },
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                actorMargin: 80,
+                width: 200,
+                height: 65,
+                boxMargin: 10
+            }
+            });
+        }
+
+        // 初始化 RevealJS
+        Reveal.initialize({
+            hash: true,
+            center: false,  // 关闭居中
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            slideNumber: true,
+            controls: true,
+            progress: true,
+            history: true,
+            overview: true,
+            keyboard: true,
+            touch: true,
+            loop: false,
+            rtl: false,
+            fragments: true,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            mouseWheel: false,
+            hideAddressBar: true,
+            previewLinks: false,
+            width: '100%',  // 使用百分比而不是固定像素
+            height: '100%',
+            margin: 0,      // 边距设为0
+            minScale: 1,    // 最小缩放比例为1，不缩小
+            maxScale: 1,    // 最大缩放比例为1，不放大
+            
+            // 插件
+            plugins: []
+        });
+        
+
+        // 监听幻灯片切换，重新渲染 Mermaid
+        Reveal.on('slidechanged', event => {
+            const currentSlide = event.currentSlide;
+            const mermaidElements = currentSlide.querySelectorAll('.mermaid');
+            
+            if (mermaidElements.length > 0 && typeof mermaid !== 'undefined') {
+                try {
+                    mermaid.init(undefined, mermaidElements);
+                } catch (error) {
+                    console.error('Mermaid 渲染错误:', error);
+                }
+            }
+        });
+
+        // 添加一些微交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 卡片悬停效果
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+        
+        // 键盘快捷键提示
+        console.log('%c欢迎使用 AI × Mermaid 演示文稿！', 'color: #257FD5; font-size: 20px; font-weight: bold;');
+        console.log('%c版本: v2.0 | 更新: 2025-10-21', 'color: #666; font-size: 12px;');
+        console.log('%c键盘快捷键：', 'color: #1a5fa6; font-size: 16px; font-weight: bold;');
+        console.log('→ / Space : 下一张幻灯片');
+        console.log('← : 上一张幻灯片');
+        console.log('↑ / ↓ : 垂直导航');
+        console.log('Home / End : 首页 / 尾页');
+        console.log('Esc / O : 总览模式');
+        console.log('S : 演讲者视图');
+        console.log('F : 全屏模式');
+        console.log('B / . : 暂停（黑屏）');
+        console.log('%c调试提示：', 'color: #FF6B35; font-size: 14px; font-weight: bold;');
+        console.log('如果图表显示异常，请清除浏览器缓存后刷新（Cmd+Shift+R 或 Ctrl+Shift+R）');
+        console.log('检查 Mermaid 状态: typeof mermaid =', typeof mermaid);
+        console.log('图表数量:', document.querySelectorAll('.mermaid').length);
+        
+        // 添加全局强制重新渲染函数
+        window.forceReinitMermaid = function() {
+            if (typeof mermaid !== 'undefined') {
+                const allMermaid = document.querySelectorAll('.mermaid');
+                console.log('强制重新渲染', allMermaid.length, '个 Mermaid 图表...');
+                try {
+                    mermaid.init(undefined, allMermaid);
+                    console.log('✅ 重新渲染完成');
+                } catch (error) {
+                    console.error('❌ 渲染失败:', error);
+                }
+            } else {
+                console.error('❌ Mermaid 库未加载');
+            }
+        };
+        
+        // 添加封面调试函数（用于诊断）
+        window.debugCover = function() {
+            const firstSection = document.querySelector('.reveal .slides > section:first-child');
+            const coverSlide = document.querySelector('.cover-slide-with-bg');
+            const coverOverlay = document.querySelector('.cover-overlay');
+            
+            console.log('%c=== 封面调试信息 ===', 'color: #FF6B35; font-size: 16px; font-weight: bold;');
+            
+            if (firstSection) {
+                const computed = window.getComputedStyle(firstSection);
+                console.log('📐 First Section:');
+                console.log('  尺寸:', firstSection.offsetWidth, 'x', firstSection.offsetHeight);
+                console.log('  位置:', 'left:', firstSection.offsetLeft, 'top:', firstSection.offsetTop);
+                console.log('  Margin:', computed.margin);
+                console.log('  Padding:', computed.padding);
+            }
+            
+            if (coverSlide) {
+                console.log('🖼️ Cover Slide:');
+                console.log('  尺寸:', coverSlide.offsetWidth, 'x', coverSlide.offsetHeight);
+            }
+            
+            if (coverOverlay) {
+                const computed = window.getComputedStyle(coverOverlay);
+                console.log('🎨 Overlay:');
+                console.log('  Background:', computed.background);
+            }
+            
+            console.log('🖥️ 窗口尺寸:', window.innerWidth, 'x', window.innerHeight);
+            console.log('%c✅ 封面使用纯CSS蒙层，无图片尺寸问题', 'color: #48bb78; font-size: 13px;');
+        };
+        
+        console.log('%c如果图表显示异常，在控制台运行: forceReinitMermaid()', 'color: #2EC4B6; font-size: 13px;');
+        console.log('%c查看封面调试信息，在控制台运行: debugCover()', 'color: #2EC4B6; font-size: 13px;');
+    </script>
+</body>
+</html>
