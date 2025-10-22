@@ -589,7 +589,7 @@
 
         .agenda-wrapper {
             width: 100%;
-            max-width: 960px;
+            max-width: var(--content-max-width);
             margin: 0 auto;
             text-align: center;
             display: flex;
@@ -600,6 +600,13 @@
         .agenda-grid {
             gap: 1.5rem;
             justify-content: center;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        @media (max-width: 1100px) {
+            .agenda-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
         }
         
         /* ========================================
