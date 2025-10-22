@@ -155,8 +155,35 @@
         }
         
         .reveal .slides > section:not(:first-child) > * {
-            max-width: var(--content-max-width);
-            width: 100%;
+            width: min(100%, var(--content-max-width));
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reveal .slides > section:not(:first-child) > .agenda-wrapper {
+            width: auto;
+        }
+
+        .reveal .slides > section:not(:first-child) > .agenda-wrapper .agenda-grid {
+            justify-content: center;
+        }
+
+        /* 垂直子幻灯片布局 */
+        .reveal .slides > section > section {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-direction: column !important;
+            padding: var(--section-padding) !important;
+            box-sizing: border-box !important;
+            width: 100vw !important;
+            min-height: 100vh !important;
+        }
+
+        .reveal .slides > section > section > * {
+            width: min(100%, var(--content-max-width));
+            margin-left: auto;
+            margin-right: auto;
         }
         
         /* ========================================
@@ -559,6 +586,21 @@
             margin: 0;
             width: 100%;
         }
+
+        .agenda-wrapper {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .agenda-grid {
+            gap: 1.5rem;
+            justify-content: center;
+        }
         
         /* ========================================
            通用组件样式
@@ -902,51 +944,53 @@
 
             <!-- 目录 -->
             <section>
-                <h2 class="gradient-text" style="font-size: 2em; margin-bottom: 2rem !important;">
-                    <i class="fas fa-list-ul mr-3"></i>议程
-                </h2>
-                <div class="grid-auto" style="gap: 1.5rem;">
-                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                        <div class="icon-box icon-box-small" style="width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                            <i class="fas fa-question"></i>
+                <div class="agenda-wrapper">
+                    <h2 class="gradient-text" style="font-size: 2em; margin-bottom: 2rem !important;">
+                        <i class="fas fa-list-ul mr-3"></i>议程
+                    </h2>
+                    <div class="grid-auto agenda-grid">
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">我们的图，为什么不一样？</h3>
                         </div>
-                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">我们的图，为什么不一样？</h3>
-                    </div>
-                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                        <div class="icon-box icon-box-small" style="background: var(--gradient-accent); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                            <i class="fas fa-users-slash"></i>
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="background: var(--gradient-accent); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-users-slash"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">协作的痛点</h3>
                         </div>
-                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">协作的痛点</h3>
-                    </div>
-                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                        <div class="icon-box icon-box-small" style="background: var(--gradient-cool); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                            <i class="fas fa-project-diagram"></i>
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="background: var(--gradient-cool); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">Mermaid 是什么？</h3>
                         </div>
-                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">Mermaid 是什么？</h3>
-                    </div>
-                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                        <div class="icon-box icon-box-small" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                            <i class="fas fa-rocket"></i>
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">Mermaid x AI：更进一步的可能性</h3>
                         </div>
-                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">Mermaid x AI：更进一步的可能性</h3>
-                    </div>
-                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                        <div class="icon-box icon-box-small" style="width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                            <i class="fas fa-users"></i>
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">不同角色的应用</h3>
                         </div>
-                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">不同角色的应用</h3>
-                    </div>
-                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                        <div class="icon-box icon-box-small" style="background: var(--gradient-accent); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                            <i class="fas fa-plus-circle"></i>
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="background: var(--gradient-accent); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">多一个例子</h3>
                         </div>
-                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">多一个例子</h3>
-                    </div>
-                    <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                        <div class="icon-box icon-box-small" style="background: var(--gradient-cool); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                            <i class="fas fa-check-circle"></i>
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="background: var(--gradient-cool); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">总结</h3>
                         </div>
-                        <h3 class="font-bold mb-2" style="font-size: 1.3em;">总结</h3>
                     </div>
                 </div>
                 <aside class="notes">
