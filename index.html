@@ -549,15 +549,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow: visible;
         }
         
         /* Mermaid SVG容器 */
         .mermaid svg {
-            max-width: 100%;
+            max-width: none !important;
             max-height: 60vh;
             height: auto;
-            width: auto;
+            width: 100% !important;
+        }
+
+        .mermaid svg[aria-roledescription="gantt"] {
+            max-width: none !important;
         }
         
         /* ========================================
@@ -1142,7 +1146,41 @@
                     </div>
                     <p class="text-lg text-gray-600 mt-6" style="text-align: center;">Mermaid 还支持 ER 图、用户旅程图、思维导图等更多类型。</p>
                 </section>
-                
+
+                <section>
+                    <h3 class="gradient-text mb-6">Mermaid 图表地图</h3>
+                    <div class="card card-left">
+                       <div class="mermaid" style="font-size: 1.35em; min-width: 900px; min-height: 420px;">
+                            mindmap
+                              root((Mermaid 图表家族))
+                                流程图
+                                  标准流程
+                                  子流程
+                                  决策分支
+                                序列图
+                                  系统交互
+                                  生命周期
+                                甘特图
+                                  项目排期
+                                  里程碑
+                                状态图
+                                  状态迁移
+                                  事件触发
+                                类图
+                                  对象结构
+                                  关系建模
+                                ER 图
+                                  实体关系
+                                  数据建模
+                                用户旅程图
+                                  触点拆解
+                                  情绪曲线
+                                饼图 / 其他
+                                  数据统计
+                        </div>
+                    </div>
+                </section>
+
                 <section>
                     <h3 class="gradient-text mb-6">示例：流程图</h3>
                     <div class="mermaid">
@@ -1280,7 +1318,7 @@
                     <h3 class="gradient-text mb-4">甘特图示例 - 项目管理</h3>
                     <div class="code-render-split">
                         <div class="code-panel">
-                            <pre><code style="font-size: 0.65em;">gantt
+                            <pre><code>gantt
     title AI项目开发计划
     dateFormat YYYY-MM-DD
     section 需求分析
@@ -1297,7 +1335,7 @@
     上线        :2025-02-12, 2d</code></pre>
                         </div>
                         <div class="render-panel">
-                            <div class="mermaid" style="font-size: 1.35em; min-width: 900px; min-height: 420px;">
+                            <div class="mermaid">
                                 gantt
                                     title AI项目开发计划
                                     dateFormat YYYY-MM-DD
@@ -2206,14 +2244,6 @@ graph TD
             mermaid.initialize({ 
             startOnLoad: true,
             theme: 'default',
-            themeVariables: {
-                primaryColor: '#257FD5',
-                primaryTextColor: '#fff',
-                primaryBorderColor: '#1a5fa6',
-                lineColor: '#257FD5',
-                secondaryColor: '#FF6B35',
-                tertiaryColor: '#2EC4B6',
-            },
             flowchart: {
                 curve: 'basis',
                 padding: 20
@@ -2225,6 +2255,9 @@ graph TD
                 width: 200,
                 height: 65,
                 boxMargin: 10
+            },
+            gantt: {
+                useMaxWidth: true
             }
             });
         }
