@@ -991,6 +991,12 @@
                             <h3 class="font-bold mb-2" style="font-size: 1.3em;">Mermaid 是什么？</h3>
                         </div>
                         <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="background: var(--gradient-green); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">协同生态</h3>
+                        </div>
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
                             <div class="icon-box icon-box-small" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
                                 <i class="fas fa-rocket"></i>
                             </div>
@@ -1191,23 +1197,6 @@
                     </div>
                 </section>
 
-                <section>
-                    <h3 class="gradient-text mb-6">示例：流程图</h3>
-                    <div class="mermaid">
-                        graph LR
-                            A[开始] --> B{需要AI吗?}
-                            B -->|是| C[使用AI生成]
-                            B -->|否| D[手动编写]
-                            C --> E[自动优化]
-                            D --> E
-                            E --> F[渲染图表]
-                            F --> G[完成]
-                            
-                            style A fill:#257FD5,stroke:#1a5fa6,stroke-width:3px,color:#fff
-                            style G fill:#FF6B35,stroke:#FFA07A,stroke-width:3px,color:#fff
-                            style C fill:#2EC4B6,stroke:#00D4FF,stroke-width:2px,color:#fff
-                    </div>
-                </section>
                 
                 <!-- 新增：代码对比展示 -->
                 <section>
@@ -1439,7 +1428,50 @@
                 </section>
             </section>
 
-            <!-- 第四部分：Mermaid x AI：更进一步的可能性 -->
+            <!-- 协同生态：办公工具支持 -->
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #00b09b 0%, #96c93d 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-network-wired mr-3"></i>协同生态
+                    </h2>
+                    <p class="text-white text-2xl mt-8">在主流办公平台中即刻渲染 Mermaid</p>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">即时协同：飞书 / 钉钉</h3>
+                    <div class="card card-left" style="max-width: 960px;">
+                        <img src="飞书集成.png" alt="飞书集成 Mermaid" class="rounded-lg shadow-lg mb-6">
+                        <p class="text-lg text-gray-600">飞书文档、Base 与钉钉在线文档都支持 <code>mermaid</code> 代码块，会议讨论中复制语句即可即时生成流程图、泳道图。</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">知识库：Notion / Coda</h3>
+                    <div class="card card-left" style="max-width: 960px;">
+                        <img src="notion集成.png" alt="Notion 集成 Mermaid" class="rounded-lg shadow-lg mb-6">
+                        <p class="text-lg text-gray-600">在 Notion、Coda 等工具中输入 <code>```mermaid</code> 即可渲染，周报、项目计划、会议纪要都能保持统一的图文语言。</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">开源文档与社区</h3>
+                    <div class="card card-left" style="max-width: 960px;">
+                        <img src="开源文档集成.png" alt="开源文档平台集成 Mermaid" class="rounded-lg shadow-lg mb-6">
+                        <p class="text-lg text-gray-600">语雀、Confluence、GitBook 等文档平台内置 Mermaid 宏，开源社区和企业文档均可无缝接入。</p>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section data-background-gradient="linear-gradient(135deg, #fa709a 0%, #fee140 100%)">
+                    <h2 class="text-white">
+                        <i class="fas fa-brain mr-3"></i>AI 擅长什么？
+                    </h2>
+                    <p class="text-white text-2xl mt-8">AI 擅长生成代码，无限创意</p>
+                </section>
+            </section>
+
+            <!-- 第五部分：Mermaid x AI：更进一步的可能性 -->
             <section>
                 <section data-background-gradient="linear-gradient(135deg, #fa709a 0%, #fee140 100%)">
                     <h2 class="text-white">
@@ -1485,7 +1517,7 @@
                 </section>
             </section>
 
-            <!-- 第五部分：不同角色的应用 -->
+            <!-- 第六部分：不同角色的应用 -->
             <section>
                 <section data-background-gradient="linear-gradient(135deg, #2EC4B6 0%, #00D4FF 100%)">
                     <h2 class="text-white">
@@ -1541,7 +1573,7 @@
                 </section>
             </section>
 
-            <!-- 第六部分：多一个例子 -->
+            <!-- 第七部分：多一个例子 -->
             <section>
                 <section data-background-gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
                     <h2 class="text-white">
@@ -1597,7 +1629,7 @@ gitGraph
                 </section>
             </section>
 
-            <!-- 第七部分：总结 -->
+            <!-- 第八部分：总结 -->
             <section>
                 <section data-background-gradient="linear-gradient(135deg, #257FD5 0%, #1a5fa6 100%)">
                     <h2 class="text-white">
@@ -1641,7 +1673,7 @@ gitGraph
 
             
 
-            <!-- 第五部分：最佳实践 -->
+            <!-- 第九部分：最佳实践 -->
             <section>
                 <section data-background-gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
                     <h2 class="text-white">
@@ -2059,7 +2091,7 @@ graph TD
                 </section>
             </section>
 
-            <!-- 第六部分：未来展望 -->
+            <!-- 第十部分：未来展望 -->
             <section>
                 <section data-background-gradient="linear-gradient(135deg, #257FD5 0%, #1a5fa6 100%)">
                     <h2 class="text-white">
