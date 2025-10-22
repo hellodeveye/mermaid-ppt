@@ -784,8 +784,10 @@
             border: 2px solid #e2e8f0;
             display: flex;
             flex-direction: column;
-            max-height: 60vh;
-            overflow: hidden;
+            max-height: 65vh;
+            overflow: auto;
+            /* align-items: center; */
+            justify-content: center;
         }
         
         .render-panel h4 {
@@ -798,7 +800,7 @@
         .render-panel .mermaid {
             box-shadow: none;
             padding: 0;
-            overflow: hidden;
+            overflow: visible;
             flex: 1;
         }
         
@@ -1104,6 +1106,10 @@
                 
                 <section>
                     <h3 class="gradient-text mb-6">Mermaid 简介</h3>
+                    <div class="card card-left">
+                        <img src="mermaid-官网.png" alt="Mermaid 官网界面" class="rounded-lg shadow-lg mb-6" style="width: 100%; max-width: 900px;">
+                        <p class="text-lg text-gray-600" style="margin: 0;">Mermaid 是一个以文本描述为核心的图表引擎。只需简单语法就能快速生成流程图、序列图、甘特图等多种可视化，适合在文档、Wiki、演示和自动化流水线中使用。</p>
+                    </div>
                 </section>
                 
                 <section>
@@ -1131,9 +1137,10 @@
                         </div>
                         <div class="card text-center">
                             <i class="fas fa-chart-pie text-5xl mb-4" style="color: #feca57;"></i>
-                            <h4 class="font-bold text-lg">饼图</h4>
+                            <h4 class="font-bold text-lg">饼图…</h4>
                         </div>
                     </div>
+                    <p class="text-lg text-gray-600 mt-6" style="text-align: center;">Mermaid 还支持 ER 图、用户旅程图、思维导图等更多类型。</p>
                 </section>
                 
                 <section>
@@ -1160,7 +1167,6 @@
                     <p class="text-lg mb-4">左侧是Mermaid代码，右侧是实时渲染结果</p>
                     <div class="code-render-split">
                         <div class="code-panel">
-                            <h4><i class="fas fa-code mr-2"></i>Mermaid代码</h4>
                             <pre><code>graph TD
     A[用户访问] --> B{是否登录?}
     B -->|是| C[显示首页]
@@ -1170,13 +1176,9 @@
     F -->|是| C
     F -->|否| G[显示错误]
     G --> E
-    
-    style A fill:#257FD5,color:#fff
-    style C fill:#48bb78,color:#fff
-    style G fill:#f56565,color:#fff</code></pre>
+    </code></pre>
                         </div>
                         <div class="render-panel">
-                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
                             <div class="mermaid">
                                 graph TD
                                     A[用户访问] --> B{是否登录?}
@@ -1187,10 +1189,7 @@
                                     F -->|是| C
                                     F -->|否| G[显示错误]
                                     G --> E
-                                    
-                                    style A fill:#257FD5,color:#fff
-                                    style C fill:#48bb78,color:#fff
-                                    style G fill:#f56565,color:#fff
+                                
                             </div>
                         </div>
                     </div>
@@ -1201,7 +1200,6 @@
                     <h3 class="gradient-text mb-4">类图示例</h3>
                     <div class="code-render-split">
                         <div class="code-panel">
-                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
                             <pre><code>classDiagram
     class User {
         +String name
@@ -1222,7 +1220,6 @@
     User "1" --> "*" Post : creates</code></pre>
                         </div>
                         <div class="render-panel">
-                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
                             <div class="mermaid">
                                 classDiagram
                                     class User {
@@ -1252,7 +1249,6 @@
                     <h3 class="gradient-text mb-4">状态图示例</h3>
                     <div class="code-render-split">
                         <div class="code-panel">
-                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
                             <pre><code>stateDiagram-v2
     [*] --> 草稿
     草稿 --> 审核中: 提交审核
@@ -1264,7 +1260,6 @@
     已下架 --> [*]</code></pre>
                         </div>
                         <div class="render-panel">
-                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
                             <div class="mermaid">
                                 stateDiagram-v2
                                     [*] --> 草稿
@@ -1285,7 +1280,6 @@
                     <h3 class="gradient-text mb-4">甘特图示例 - 项目管理</h3>
                     <div class="code-render-split">
                         <div class="code-panel">
-                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
                             <pre><code style="font-size: 0.65em;">gantt
     title AI项目开发计划
     dateFormat YYYY-MM-DD
@@ -1303,8 +1297,7 @@
     上线        :2025-02-12, 2d</code></pre>
                         </div>
                         <div class="render-panel">
-                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
-                            <div class="mermaid" style="font-size: 0.6em;">
+                            <div class="mermaid" style="font-size: 1.35em; min-width: 900px; min-height: 420px;">
                                 gantt
                                     title AI项目开发计划
                                     dateFormat YYYY-MM-DD
@@ -1330,7 +1323,6 @@
                     <h3 class="gradient-text mb-4">饼图示例 - 数据统计</h3>
                     <div class="code-render-split">
                         <div class="code-panel">
-                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
                             <pre><code>pie title 开发时间分配
     "需求分析" : 15
     "架构设计" : 20
@@ -1339,7 +1331,6 @@
     "文档编写" : 10</code></pre>
                         </div>
                         <div class="render-panel">
-                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
                             <div class="mermaid">
                                 pie title 开发时间分配
                                     "需求分析" : 15
@@ -1357,7 +1348,6 @@
                     <h3 class="gradient-text mb-4">Git分支图示例</h3>
                     <div class="code-render-split">
                         <div class="code-panel">
-                            <h4><i class="fas fa-code mr-2"></i>代码</h4>
                             <pre><code>gitGraph
     commit
     commit
@@ -1377,7 +1367,6 @@
     merge develop</code></pre>
                         </div>
                         <div class="render-panel">
-                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
                             <div class="mermaid">
                                 gitGraph
                                     commit
@@ -1517,7 +1506,6 @@
                     <h3 class="gradient-text mb-6">动态图表：Git 分支可视化</h3>
                     <div class="code-render-split">
                         <div class="code-panel">
-                            <h4><i class="fas fa-code mr-2"></i>Mermaid 代码</h4>
                             <pre><code class="language-mermaid">
 gitGraph
     commit
@@ -1538,7 +1526,6 @@ gitGraph
                             </code></pre>
                         </div>
                         <div class="render-panel">
-                            <h4><i class="fas fa-eye mr-2"></i>渲染结果</h4>
                             <div class="mermaid">
 gitGraph
     commit
