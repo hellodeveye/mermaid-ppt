@@ -772,6 +772,8 @@
             margin: 0;
             background: transparent;
             box-shadow: none;
+            overflow: visible !important;
+            width: 100%;
         }
         
         .code-panel code {
@@ -779,6 +781,8 @@
             background: transparent;
             font-size: 0.75em;
             line-height: 1.6;
+            display: block;
+            overflow: visible !important;
         }
         
         .render-panel {
@@ -999,6 +1003,12 @@
                             <h3 class="font-bold mb-2" style="font-size: 1.3em;">不同角色的应用</h3>
                         </div>
                         <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
+                            <div class="icon-box icon-box-small" style="width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">多一个例子</h3>
+                        </div>
+                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
                             <div class="icon-box icon-box-small" style="background: var(--gradient-cool); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -1111,7 +1121,7 @@
                 <section>
                     <h3 class="gradient-text mb-6">Mermaid 简介</h3>
                     <div class="card card-left">
-                        <img src="mermaid-官网.png" alt="Mermaid 官网界面" class="rounded-lg shadow-lg mb-6" style="width: 100%; max-width: 900px;">
+                        <img src="mermaid-官网.png" alt="Mermaid 官网界面" class="rounded-lg shadow-lg mb-6" style="width: 100%;">
                         <p class="text-lg text-gray-600" style="margin: 0;">Mermaid 是一个以文本描述为核心的图表引擎。只需简单语法就能快速生成流程图、序列图、甘特图等多种可视化，适合在文档、Wiki、演示和自动化流水线中使用。</p>
                     </div>
                 </section>
@@ -1150,7 +1160,7 @@
                 <section>
                     <h3 class="gradient-text mb-6">Mermaid 图表地图</h3>
                     <div class="card card-left">
-                       <div class="mermaid" style="font-size: 1.35em; min-width: 900px; min-height: 420px;">
+                       <div class="mermaid" style="font-size: 1.35em; width: 100%; min-height: 420px;">
                             mindmap
                               root((Mermaid 图表家族))
                                 流程图
