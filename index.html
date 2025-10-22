@@ -56,7 +56,7 @@
             
             /* 布局尺寸 */
             --content-max-width: 1200px;
-            --section-padding: 5rem 7rem;
+            --section-padding: 3rem 7rem;
         }
         
         html, body {
@@ -395,6 +395,14 @@
             background-clip: text;
             font-weight: 700;
             margin-bottom: var(--spacing-xl) !important;
+            text-align: center;
+            width: 100%;
+            margin-top: 0.75rem !important;
+        }
+
+        .text-lg {
+            font-size: 2.125rem !important;
+            line-height: 1.4;
         }
         
         .gradient-text-accent {
@@ -961,12 +969,6 @@
                     </h2>
                     <div class="grid-auto agenda-grid">
                         <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                            <div class="icon-box icon-box-small" style="width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                                <i class="fas fa-question"></i>
-                            </div>
-                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">我们的图，为什么不一样？</h3>
-                        </div>
-                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
                             <div class="icon-box icon-box-small" style="background: var(--gradient-accent); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
                                 <i class="fas fa-users-slash"></i>
                             </div>
@@ -991,12 +993,6 @@
                             <h3 class="font-bold mb-2" style="font-size: 1.3em;">不同角色的应用</h3>
                         </div>
                         <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
-                            <div class="icon-box icon-box-small" style="background: var(--gradient-accent); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
-                                <i class="fas fa-plus-circle"></i>
-                            </div>
-                            <h3 class="font-bold mb-2" style="font-size: 1.3em;">多一个例子</h3>
-                        </div>
-                        <div class="card" style="padding: 1.8rem 1.5rem; min-height: 220px;">
                             <div class="icon-box icon-box-small" style="background: var(--gradient-cool); width: 60px; height: 60px; font-size: 1.5em; margin-bottom: 1rem;">
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -1005,37 +1001,58 @@
                     </div>
                 </div>
                 <aside class="notes">
-                    今天的演讲分为七个主要部分。
+                    今天的演讲围绕几个核心部分展开。
                 </aside>
             </section>
 
-            <!-- 第一部分：我们的图，为什么不一样？ -->
+            <!-- 第二部分：协作的痛点 -->
             <section>
-                <section data-background-gradient="linear-gradient(135deg, #257FD5 0%, #1a5fa6 100%)">
+                <section data-background-gradient="linear-gradient(135deg, #FF6B35 0%, #FFA07A 100%)">
                     <h2 class="text-white">
-                        <i class="fas fa-question-circle mr-3"></i>我们的图，为什么不一样？
+                        <i class="fas fa-users-slash mr-3"></i>协作的痛点
                     </h2>
-                    <p class="text-white text-2xl mt-8">从“画”图到“写”图，再到“聊”图</p>
+                    <p class="text-white text-2xl mt-8">图表协作中的“鸡同鸭讲”</p>
                 </section>
 
                 <section>
-                    <h3 class="gradient-text mb-6">传统图表的困境</h3>
-                    <div class="grid-2 text-left">
-                        <div>
-                            <img src="我们的图为什么不一样-1.png" class="rounded-lg shadow-lg">
+                    <h3 class="gradient-text mb-6">同一个需求，三张完全不同的图</h3>
+                    <div class="grid-3">
+                        <div class="card card-left">
+                            <div class="badge" style="align-self: flex-start;">视觉派</div>
+                            <img src="我们的图为什么不一样-1.png" class="rounded-lg shadow-md mb-4" alt="视觉风格的流程图">
+                            <h4 class="text-xl font-bold mb-3">好看 ≠ 好用</h4>
+                            <p class="text-base text-gray-600">渐变、阴影、装饰齐上阵。每次改动都得重新排版，别人接手几乎要从头来过。</p>
                         </div>
-                        <div>
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-palette mr-2 text-purple-600"></i>手“画”图表
-                            </h4>
-                            <ul class="text-lg">
-                                <li><i class="fas fa-hourglass-half mr-2"></i>耗时费力：需要手动拖拽、对齐、调整样式</li>
-                                <li><i class="fas fa-ruler-combined mr-2"></i>难以标准化：团队成员风格不一，难以统一</li>
-                                <li><i class="fas fa-sync-alt mr-2"></i>更新困难：需求变更，全盘重来</li>
-                                <li><i class="fas fa-file-excel mr-2"></i>版本管理噩梦：二进制文件，无法有效 diff</li>
-                            </ul>
+                        <div class="card card-left">
+                            <div class="badge badge-cool" style="align-self: flex-start;">工程派</div>
+                            <img src="我们的图为什么不一样-2.png" class="rounded-lg shadow-md mb-4" alt="工程师风格的流程图">
+                            <h4 class="text-xl font-bold mb-3">逻辑满分，表达不及格</h4>
+                            <p class="text-base text-gray-600">节点紧凑堆叠、颜色单一，只有作者本人能看懂入口出口，沟通成本直线上升。</p>
+                        </div>
+                        <div class="card card-left">
+                            <div class="badge badge-accent" style="align-self: flex-start;">赶工派</div>
+                            <img src="我们的图为什么不一样-3.png" class="rounded-lg shadow-md mb-4" alt="临时赶工的流程图">
+                            <h4 class="text-xl font-bold mb-3">赶死线的“差不多”</h4>
+                            <p class="text-base text-gray-600">箭头随缘、字号随机，只能表达“差不多”意思，后续讨论很难落到细节。</p>
                         </div>
                     </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">这些图到底哪里不对？</h3>
+                    <div class="card card-left">
+                        <h4 class="text-2xl font-bold mb-4">
+                            <i class="fas fa-exclamation-circle mr-2 text-orange-500"></i>三个“不统一”带来的隐形成本
+                        </h4>
+                        <ul class="text-lg">
+                            <li><i class="fas fa-palette mr-2 text-purple-600"></i>风格不统一：每次评审像在看不同项目，团队沟通缺少共同的视觉语言。</li>
+                            <li><i class="fas fa-share-alt mr-2 text-blue-500"></i>语义不统一：节点命名、箭头方向随意，版本流转时信息不断丢失。</li>
+                            <li><i class="fas fa-tools mr-2 text-red-500"></i>维护方式不统一：修改靠重画、历史靠截图，知识沉淀几乎为零。</li>
+                        </ul>
+                    </div>
+                    <aside class="notes">
+                        总结痛点：风格、语义、维护三个维度全乱套，为引入“标准化”埋点。
+                    </aside>
                 </section>
 
                 <section>
@@ -1053,68 +1070,11 @@
                             </ul>
                         </div>
                         <div>
-                            <img src="我们的图为什么不一样-2.png" class="rounded-lg shadow-lg">
+                            <img src="mermaid-1.jpg" class="rounded-lg shadow-lg">
                         </div>
                     </div>
                 </section>
 
-                <section>
-                    <h3 class="gradient-text mb-6">AI 生成图表的革命</h3>
-                    <div class="grid-2 text-left">
-                        <div>
-                            <img src="我们的图为什么不一样-3.png" class="rounded-lg shadow-lg">
-                        </div>
-                        <div>
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-comments mr-2 text-green-600"></i>与 AI “聊”图
-                            </h4>
-                            <ul class="text-lg">
-                                <li><i class="fas fa-lightbulb mr-2"></i>零门槛：自然语言描述，无需学习</li>
-                                <li><i class="fas fa-rocket mr-2"></i>高效率：秒级生成复杂图表</li>
-                                <li><i class="fas fa-infinity mr-2"></i>无限可能：AI 拓展边界，创造新可能</li>
-                                <li><i class="fas fa-users mr-2"></i>协作新范式：从讨论图，到一起“聊”出图</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </section>
-
-            <!-- 第二部分：协作的痛点 -->
-            <section>
-                <section data-background-gradient="linear-gradient(135deg, #FF6B35 0%, #FFA07A 100%)">
-                    <h2 class="text-white">
-                        <i class="fas fa-users-slash mr-3"></i>协作的痛点
-                    </h2>
-                    <p class="text-white text-2xl mt-8">图表协作中的“鸡同鸭讲”</p>
-                </section>
-
-                <section>
-                    <h3 class="gradient-text mb-6">沟通的鸿沟</h3>
-                    <div class="grid-2 text-left">
-                        <div>
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-user-tie mr-2 text-purple-600"></i>产品经理 vs. <i class="fas fa-user-cog mr-2 text-blue-600"></i>工程师
-                            </h4>
-                            <ul class="text-lg">
-                                <li><i class="fas fa-comment-slash mr-2"></i>“我想要一个更‘酷’的流程图”</li>
-                                <li><i class="fas fa-question-circle mr-2"></i>“‘酷’是什么？能具体点吗？”</li>
-                                <li><i class="fas fa-file-alt mr-2"></i>产品经理画了张草图，工程师看不懂</li>
-                                <li><i class="fas fa-sync-alt mr-2"></i>反复修改，效率低下</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-user-shield mr-2 text-green-600"></i>工程师 vs. <i class="fas fa-user-tag mr-2 text-yellow-600"></i>测试
-                            </h4>
-                            <ul class="text-lg">
-                                <li><i class="fas fa-bug mr-2"></i>“这个逻辑分支你没考虑到”</li>
-                                <li><i class="fas fa-file-code mr-2"></i>“代码里就是这么写的”</li>
-                                <li><i class="fas fa-sitemap mr-2"></i>图表与实现不一致，导致测试盲点</li>
-                                <li><i class="fas fa-exclamation-triangle mr-2"></i>线上问题频发</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
 
                 <section>
                     <h3 class="gradient-text mb-6">协作的理想状态</h3>
@@ -1144,26 +1104,6 @@
                 
                 <section>
                     <h3 class="gradient-text mb-6">Mermaid 简介</h3>
-                    <div class="text-left" style="width: 100%;">
-                        <div class="feature-box">
-                            <h4 class="text-xl font-bold mb-3">
-                                <i class="fas fa-code mr-2 text-purple-600"></i>基于文本的图表
-                            </h4>
-                            <p class="text-lg">使用简单的文本语法即可创建复杂的图表和流程图</p>
-                        </div>
-                        <div class="feature-box">
-                            <h4 class="text-xl font-bold mb-3">
-                                <i class="fas fa-sync-alt mr-2 text-purple-600"></i>实时渲染
-                            </h4>
-                            <p class="text-lg">在浏览器中即时渲染，无需额外的工具或软件</p>
-                        </div>
-                        <div class="feature-box">
-                            <h4 class="text-xl font-bold mb-3">
-                                <i class="fas fa-puzzle-piece mr-2 text-purple-600"></i>易于集成
-                            </h4>
-                            <p class="text-lg">可轻松集成到Markdown、文档和网页中</p>
-                        </div>
-                    </div>
                 </section>
                 
                 <section>
