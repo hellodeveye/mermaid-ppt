@@ -600,23 +600,12 @@
         }
 
         .ai-capabilities-grid {
-            grid-template-columns: repeat(4, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
             gap: var(--spacing-xl);
             align-items: stretch;
             margin-top: var(--spacing-lg);
         }
 
-        @media (max-width: 1600px) {
-            .ai-capabilities-grid {
-                grid-template-columns: repeat(2, minmax(320px, 1fr));
-            }
-        }
-
-        @media (max-width: 900px) {
-            .ai-capabilities-grid {
-                grid-template-columns: 1fr;
-            }
-        }
 
         .ai-capabilities-grid .card {
             min-height: auto;
@@ -867,6 +856,67 @@
             display: block;
             overflow: visible !important;
         }
+
+        .example-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: stretch;
+        }
+
+        .example-shot {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .example-shot img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-diagram {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .example-diagram h4 {
+            margin: 0;
+        }
+
+        @media (max-width: 1200px) {
+            .example-split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mock-screen {
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+            min-height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-size: 1rem;
+            text-align: center;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
         
         .render-panel {
             background: white;
@@ -1668,47 +1718,229 @@
                 </section>
 
                 <section>
-                    <h3 class="gradient-text mb-6">AI x Mermaid 如何赋能不同角色</h3>
-                    <div class="grid-auto text-left">
-                        <div class="card">
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-user-tie mr-2 text-purple-600"></i>产品经理
-                            </h4>
-                            <ul class="text-lg">
-                                <li><i class="fas fa-lightbulb mr-2"></i>快速将想法转化为流程图</li>
-                                <li><i class="fas fa-users mr-2"></i>与工程师、设计师高效沟通</li>
-                                <li><i class="fas fa-file-alt mr-2"></i>生成标准化的产品文档</li>
-                            </ul>
+                    <h3 class="gradient-text mb-6">产品经理</h3>
+                    <div class="card card-left">
+                        <h4 class="text-2xl font-bold mb-4"><i class="fas fa-user-tie mr-2 text-purple-600"></i>产品经理</h4>
+                        <ul class="text-lg">
+                            <li><i class="fas fa-lightbulb mr-2"></i>快速将想法转化为流程图，辅助方案评审</li>
+                            <li><i class="fas fa-users mr-2"></i>统一图语言，与工程师、设计师高效沟通</li>
+                            <li><i class="fas fa-file-alt mr-2"></i>生成标准化需求文档与原型说明</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">产品经理示例</h3>
+                    <div class="example-split">
+                        <div class="example-shot">
+                            <div>
+                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-desktop mr-2 text-blue-500"></i>产品界面：AI 法务助手</h4>
+                                <p class="text-lg text-gray-600">产品同学使用AI对话框，输入自然语言 + 需求描述，系统生成时序图代码辅助产品设计。</p>
+                            </div>
+                            <img src="产品-mermaid-1.png" alt="产品界面截图">
                         </div>
-                        <div class="card">
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-user-cog mr-2 text-blue-600"></i>工程师
-                            </h4>
-                            <ul class="text-lg">
-                                <li><i class="fas fa-sitemap mr-2"></i>快速生成、理解和重构系统架构</li>
-                                <li><i class="fas fa-file-code mr-2"></i>自动生成代码文档</li>
-                                <li><i class="fas fa-bug mr-2"></i>通过图表快速定位问题</li>
-                            </ul>
+                        <div class="example-diagram">
+                            <h4 class="text-xl font-bold"><i class="fas fa-project-diagram mr-2 text-purple-500"></i>AI 生成的时序图</h4>
+                            <div class="mermaid">
+sequenceDiagram
+    participant 用户 as 用户
+    participant 平台 as 平台
+    participant AI系统 as AI系统
+
+    用户->>平台: 点击AI法务入口
+    平台->>用户: 跳转至AI法务新标签页
+    用户->>平台: 输入法律问题
+    平台->>用户: 发送按钮激活
+    用户->>平台: 点击发送按钮
+    平台->>AI系统: 提交法律问题
+    AI系统->>平台: 生成法律咨询答复
+    平台->>用户: 显示答复
+    用户->>平台: 检查ASL余额
+    平台->>用户: 显示余额状态
+                            </div>
                         </div>
-                        <div class="card">
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-user-shield mr-2 text-green-600"></i>测试工程师
-                            </h4>
-                            <ul class="text-lg">
-                                <li><i class="fas fa-tasks mr-2"></i>基于流程图生成测试用例</li>
-                                <li><i class="fas fa-check-double mr-2"></i>确保业务逻辑全覆盖</li>
-                                <li><i class="fas fa-history mr-2"></i>轻松追溯需求变更</li>
-                            </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">工程师</h3>
+                    <div class="card card-left">
+                        <h4 class="text-2xl font-bold mb-4"><i class="fas fa-user-cog mr-2 text-blue-600"></i>工程师</h4>
+                        <ul class="text-lg">
+                            <li><i class="fas fa-sitemap mr-2"></i>快速生成、理解和重构系统架构</li>
+                            <li><i class="fas fa-file-code mr-2"></i>自动生成代码文档、接口说明</li>
+                            <li><i class="fas fa-bug mr-2"></i>通过图表定位问题、辅助排错</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">工程师示例</h3>
+                    <div class="example-split">
+                        <div class="example-shot">
+                            <div>
+                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-terminal mr-2 text-blue-500"></i>提示词：识别模型关系</h4>
+                                <p class="text-lg text-gray-600">工程师输入用户故事，提示 AI 识别核心实体并生成 Mermaid 模型关系图。</p>
+                            </div>
+                            <div class="code-panel" style="background: #1a202c; color: #cbd5f5; max-height: none;">
+<pre><code style="background: transparent; color: #cbd5f5;">用户故事
+作为租户管理员，我期望系统能记录用户使用AI模型的使用记录，
+从而能关注到整体AI模型的使用情况。
+
+请输出适合类图展示的 Mermaid 代码。</code></pre>
+                            </div>
                         </div>
-                        <div class="card">
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-user-graduate mr-2 text-yellow-600"></i>项目经理
-                            </h4>
-                            <ul class="text-lg">
-                                <li><i class="fas fa-chart-gantt mr-2"></i>快速生成和调整项目排期</li>
-                                <li><i class="fas fa-users-cog mr-2"></i>清晰地展示团队架构和职责</li>
-                                <li><i class="fas fa-flag-checkered mr-2"></i>把控项目进度和风险</li>
-                            </ul>
+                        <div class="example-diagram">
+                            <h4 class="text-xl font-bold"><i class="fas fa-project-diagram mr-2 text-purple-500"></i>Mermaid 模型关系图</h4>
+                            <div class="mermaid">
+classDiagram
+    class TenantAdmin {
+        +String adminId
+        +String name
+        +String email
+        +monitorUsage() void
+    }
+
+    class User {
+        +String userId
+        +String name
+        +String tenantId
+        +useModel() void
+    }
+
+    class AIModel {
+        +String modelId
+        +String modelName
+        +String version
+    }
+
+    class UsageRecord {
+        +String recordId
+        +DateTime timestamp
+        +String userId
+        +String modelId
+        +String inputData
+        +String outputData
+        +Integer tokensUsed
+    }
+
+    TenantAdmin "1" --> "n" User : manages
+    User "n" --> "m" AIModel : uses
+    User "1" --> "n" UsageRecord : generates
+    AIModel "1" --> "n" UsageRecord : referenced_in
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">工程师示例 2</h3>
+                    <div class="example-split">
+                        <div class="example-shot">
+                            <div>
+                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-image mr-2 text-teal-500"></i>提示词：识别架构关系</h4>
+                                <p class="text-lg text-gray-600">上传用户与企微系统关系示意图，让 AI 自动抽取节点与连线，生成 Mermaid 拓扑图。</p>
+                            </div>
+                            <img src="研发-source-1.png" alt="研发示例源图">
+                            <p class="text-sm text-gray-500">示例：AI 解读图中“用户-企微-应用”等多方关系，自动输出一致的关系图。</p>
+                        </div>
+                        <div class="example-diagram">
+                            <h4 class="text-xl font-bold"><i class="fas fa-project-diagram mr-2 text-indigo-500"></i>Mermaid 拓扑图</h4>
+                            <div class="mermaid">
+graph TD
+    用户 --> 管理员
+    用户 --> 企微
+    企微 --> 企微部门
+    企微 --> 企微用户
+    用户 --> 待办
+    用户 --> 用户授权的待办
+    用户 --> 用户映射
+    企微 --> 企微应用
+    企微应用 --> 外部应用
+    企微 --> 企微待办
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">测试工程师</h3>
+                    <div class="card card-left">
+                        <h4 class="text-2xl font-bold mb-4"><i class="fas fa-user-shield mr-2 text-green-600"></i>测试工程师</h4>
+                        <ul class="text-lg">
+                            <li><i class="fas fa-tasks mr-2"></i>基于流程图快速生成测试用例</li>
+                            <li><i class="fas fa-check-double mr-2"></i>确保业务逻辑全覆盖，避免遗漏</li>
+                            <li><i class="fas fa-history mr-2"></i>可视化追踪需求与版本变更</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">测试工程师示例</h3>
+                    <div class="example-split">
+                        <div class="example-shot">
+                            <div>
+                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-clipboard-check mr-2 text-green-600"></i>提示词：生成测试流程图</h4>
+                                <p class="text-lg text-gray-600">输入回归测试需求，AI 自动梳理测试步骤并生成覆盖率报告。</p>
+                            </div>
+                            <img src="测试示例源.png" alt="测试工程师示例源图">
+                            <p class="text-sm text-gray-500">示例：AI 解析需求变化后自动输出新的测试用例和执行顺序。</p>
+                        </div>
+                        <div class="example-diagram">
+                            <h4 class="text-xl font-bold"><i class="fas fa-project-diagram mr-2 text-green-500"></i>Mermaid 流程图</h4>
+                            <div class="mermaid">
+graph TD
+    需求分析 --> 用例生成
+    用例生成 --> 用例库更新
+    用例库更新 --> 自动执行
+    自动执行 --> 覆盖率统计
+    自动执行 --> 缺陷收集
+    缺陷收集 --> 需求分析
+    覆盖率统计 --> 报告输出
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">项目经理</h3>
+                    <div class="card card-left">
+                        <h4 class="text-2xl font-bold mb-4"><i class="fas fa-user-graduate mr-2 text-yellow-600"></i>项目经理</h4>
+                        <ul class="text-lg">
+                            <li><i class="fas fa-chart-gantt mr-2"></i>自动生成和调整甘特图、项目排期</li>
+                            <li><i class="fas fa-users-cog mr-2"></i>可视化团队职责与资源分配</li>
+                            <li><i class="fas fa-flag-checkered mr-2"></i>图表化监控进度、风险与里程碑</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">项目经理示例</h3>
+                    <div class="example-split">
+                        <div class="example-shot">
+                            <div>
+                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-sliders-h mr-2 text-yellow-500"></i>提示词：生成项目甘特图</h4>
+                                <p class="text-lg text-gray-600">输入阶段、时长、依赖等信息，AI 自动输出甘特图并同步排期。</p>
+                            </div>
+                            <img src="产品-mermaid-2.png" alt="项目经理示例界面">
+                            <p class="text-sm text-gray-500">示例：自然语言描述里程碑→AI 解析→生成可编辑的项目计划。</p>
+                        </div>
+                        <div class="example-diagram">
+                            <h4 class="text-xl font-bold"><i class="fas fa-chart-gantt mr-2 text-yellow-600"></i>Mermaid 甘特图</h4>
+                            <div class="mermaid" style="font-size: 0.8em;">
+                                gantt
+                                    title AI项目迭代计划
+                                    dateFormat YYYY-MM-DD
+                                    section 规划阶段
+                                    需求调研      :a1, 2025-03-01, 7d
+                                    方案评审      :after a1, 3d
+                                    section 执行阶段
+                                    架构设计      :2025-03-11, 5d
+                                    开发迭代      :2025-03-13, 15d
+                                    section 测试发布
+                                    自动化测试    :2025-03-28, 7d
+                                    正式上线      :2025-04-05, 2d
+                            </div>
                         </div>
                     </div>
                 </section>
