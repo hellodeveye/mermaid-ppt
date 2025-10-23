@@ -112,10 +112,6 @@
             margin: 0 0 var(--spacing-xl) 0 !important;
         }
         
-        .reveal h4 {
-            font-size: 1.5em;
-            margin: 0 0 var(--spacing-md) 0;
-        }
         
         /* ========================================
            Section布局样式
@@ -601,6 +597,93 @@
             gap: var(--spacing-lg);
             margin: 0;
             width: 100%;
+        }
+
+        .ai-capabilities-grid {
+            grid-template-columns: repeat(4, minmax(280px, 1fr));
+            gap: var(--spacing-xl);
+            align-items: stretch;
+            margin-top: var(--spacing-lg);
+        }
+
+        @media (max-width: 1600px) {
+            .ai-capabilities-grid {
+                grid-template-columns: repeat(2, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .ai-capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ai-capabilities-grid .card {
+            min-height: auto;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(37, 127, 213, 0.12);
+            box-shadow: 0 10px 35px rgba(37, 127, 213, 0.12);
+            background: #ffffff;
+            position: relative;
+        }
+
+        .ai-capabilities-grid .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            border-radius: 12px 12px 0 0;
+            background: var(--gradient-primary);
+        }
+
+        .ai-capabilities-grid .card:nth-child(2)::before {
+            background: var(--gradient-warm);
+        }
+
+        .ai-capabilities-grid .card:nth-child(3)::before {
+            background: var(--gradient-cool);
+        }
+
+        .ai-capabilities-grid .card:nth-child(4)::before {
+            background: var(--gradient-accent);
+        }
+
+        .ai-capabilities-grid .card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ai-capabilities-grid .card ul {
+            padding-left: 0;
+            margin: 1rem 0 0 0;
+        }
+
+        .ai-capabilities-grid .card ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .capability-lead {
+            font-size: 1.05rem;
+            color: #4a5568;
+        }
+
+        .capability-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 1.5rem;
+            color: #2d3748;
+            line-height: 1.7;
+        }
+
+        .capability-list li i {
+            color: #257FD5;
+            margin-right: 0.6rem;
+            width: 1.1rem;
+            text-align: center;
         }
 
         .agenda-wrapper {
@@ -1113,6 +1196,7 @@
                         </ul>
                     </div>
                 </section>
+
             </section>
 
             <!-- 第一部分：什么是Mermaid -->
@@ -1469,6 +1553,66 @@
                     </h2>
                     <p class="text-white text-2xl mt-8">AI 擅长生成代码，无限创意</p>
                 </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">AI 能力版图</h3>
+                    <div class="grid-auto text-left ai-capabilities-grid">
+                        <div class="card card-left">
+                            <h4 class="text-2xl font-bold mb-3">
+                                <i class="fas fa-comments mr-2 text-blue-500"></i>自然语言处理与生成</h4>
+                            <ul class="capability-list">
+                                <li><i class="fas fa-question-circle"></i>语言理解、知识问答、对话交互</li>
+                                <li><i class="fas fa-pen-fancy"></i>写作、总结提炼、翻译等内容创作</li>
+                                <li><i class="fas fa-filter"></i>文本分析、分类、情绪识别与重写</li>
+                                <li><i class="fas fa-brain"></i>逻辑推理、数学解题、代码生成</li>
+                            </ul>
+                        </div>
+                        <div class="card card-left">
+                            <h4 class="text-2xl font-bold mb-3">
+                                <i class="fas fa-wave-square mr-2 text-purple-500"></i>多模态理解与生成</h4>
+                            <ul class="capability-list">
+                                <li><i class="fas fa-eye"></i>识别理解图片、音频、视频并进行视觉问答</li>
+                                <li><i class="fas fa-magic"></i>根据文本描述生成图像、音频、视频、虚拟人</li>
+                                <li><i class="fas fa-project-diagram"></i>跨模态处理，生成医学诊断报告等复合内容</li>
+                            </ul>
+                        </div>
+                        <div class="card card-left">
+                            <h4 class="text-2xl font-bold mb-3">
+                                <i class="fas fa-book mr-2 text-green-500"></i>知识管理与应用</h4>
+                            <ul class="capability-list">
+                                <li><i class="fas fa-database"></i>智能整理、总结并再创作上传的文档/音频/视频</li>
+                                <li><i class="fas fa-lightbulb"></i>构建企业专属知识库并提供知识问答</li>
+                                <li><i class="fas fa-sync"></i>与业务系统联动，保持知识持续更新</li>
+                            </ul>
+                        </div>
+                        <div class="card card-left">
+                            <h4 class="text-2xl font-bold mb-3">
+                                <i class="fas fa-robot mr-2 text-orange-500"></i>自动化与提效</h4>
+                            <ul class="capability-list">
+                                <li><i class="fas fa-project-diagram"></i>Agent 执行流程自动化任务，串联复杂步骤</li>
+                                <li><i class="fas fa-bolt"></i>生成单元测试、UI 还原、PPT 制作、网站构建等提效</li>
+                                <li><i class="fas fa-sliders-h"></i>提供灵活接口与参数，支持个性化和企业级定制</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">模型上下文协议(MCP)</h3>
+                    <div class="grid-2" style="align-items: stretch;">
+                        <div class="card card-left" style="background: linear-gradient(135deg, #f7fafc 0%, #e3f2fd 100%);">
+                            <h4 class="text-2xl font-bold mb-4"><i class="fas fa-lightbulb mr-2 text-blue-500"></i>类比：AI 大脑与身体</h4>
+                            <ul class="capability-list">
+                                <li><i class="fas fa-brain"></i>模型（LLM）= 智慧的大脑，负责思考、推理、生成、决策</li>
+                                <li><i class="fas fa-hands"></i>MCP（模型上下文协议）= 连接世界的手脚，帮助大脑取数与执行</li>
+                                <li><i class="fas fa-toolbox"></i>外部数据与工具 = 环境中的工具箱，包含实时信息、数据库、API</li>
+                            </ul>
+                        </div>
+                        <div class="card" style="display: flex; align-items: center; justify-content: center; background: #ffffff;">
+                            <img src="mcp.png" alt="模型上下文协议示意图" style="width: 100%; max-width: 520px; border-radius: 16px; box-shadow: 0 15px 35px rgba(37,127,213,0.18);">
+                        </div>
+                    </div>
+                </section>
             </section>
 
             <!-- 第五部分：Mermaid x AI：更进一步的可能性 -->
@@ -1488,9 +1632,8 @@
                                 <i class="fas fa-magic mr-2 text-purple-600"></i>图表生成
                             </h4>
                             <ul class="text-lg">
-                                <li><i class="fas fa-language mr-2"></i>自然语言生成</li>
-                                <li><i class="fas fa-image mr-2"></i>图片识别生成</li>
-                                <li><i class="fas fa-file-code mr-2"></i>代码库分析生成</li>
+                                <li><i class="fas fa-language mr-2"></i>图表智能生成： 基于自然语言描述或图片识别，直接生成图表代码</li>
+                                <li><i class="fas fa-image mr-2"></i>代码库分析生成： 自动分析代码库，生成系统架构图或流程图</li>
                             </ul>
                         </div>
                         <div class="card">
@@ -1498,9 +1641,8 @@
                                 <i class="fas fa-cogs mr-2 text-blue-600"></i>图表优化
                             </h4>
                             <ul class="text-lg">
-                                <li><i class="fas fa-palette mr-2"></i>智能美化</li>
-                                <li><i class="fas fa-project-diagram mr-2"></i>布局优化</li>
-                                <li><i class="fas fa-check-double mr-2"></i>一致性检查</li>
+                                <li><i class="fas fa-palette mr-2"></i> 布局与美化优化： 智能调整布局、风格和颜色，一键美化</li>
+                                <li><i class="fas fa-project-diagram mr-2"></i> 图表质量增强： 进行一致性检查和结构优化，确保图表专业合规</li>
                             </ul>
                         </div>
                         <div class="card">
@@ -1508,9 +1650,8 @@
                                 <i class="fas fa-comments mr-2 text-green-600"></i>图表交互
                             </h4>
                             <ul class="text-lg">
-                                <li><i class="fas fa-mouse-pointer mr-2"></i>图表元素追溯源码</li>
-                                <li><i class="fas fa-question-circle mr-2"></i>基于图表的问答</li>
-                                <li><i class="fas fa-edit mr-2"></i>可视化编辑与代码同步</li>
+                                <li><i class="fas fa-mouse-pointer mr-2"></i> 基于图表的问答： 对图表内容进行提问，获取结构化信息和洞察</li>
+                                <li><i class="fas fa-question-circle mr-2"></i>双向同步编辑： 实现图表可视化编辑与代码的实时同步</li>
                             </ul>
                         </div>
                     </div>
