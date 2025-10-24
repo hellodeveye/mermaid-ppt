@@ -542,7 +542,6 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             max-width: 100%;
             max-height: 65vh;
-            display: flex;
             align-items: center;
             justify-content: center;
             overflow: visible;
@@ -556,10 +555,7 @@
             width: 100% !important;
         }
 
-        .mermaid svg[aria-roledescription="gantt"] {
-            max-width: none !important;
-        }
-        
+       
         /* ========================================
            布局组件 - 可复用的网格系统
         ======================================== */
@@ -1944,6 +1940,24 @@ graph TD
                         </div>
                     </div>
                 </section>
+            </section>
+
+            <section>
+                <h3 class="gradient-text mb-6">项目经理</h3>
+                    <div class="mermaid" style="font-size: 0.8em;">
+                        gantt
+                            title AI项目迭代计划
+                            dateFormat YYYY-MM-DD
+                            section 规划阶段
+                            需求调研      :a1, 2025-03-01, 7d
+                            方案评审      :after a1, 3d
+                            section 执行阶段
+                            架构设计      :2025-03-11, 5d
+                            开发迭代      :2025-03-13, 15d
+                            section 测试发布
+                            自动化测试    :2025-03-28, 7d
+                            正式上线      :2025-04-05, 2d
+                    </div>
             </section>
 
             <!-- 第七部分：多一个例子 -->
