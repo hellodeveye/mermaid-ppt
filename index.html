@@ -1228,7 +1228,7 @@
                             </ul>
                         </div>
                         <div>
-                            <img src="mermaid-1.jpg" class="rounded-lg shadow-lg">
+                            <img src="mermaid-1.jpg" alt="Mermaid代码生成图表示例" class="rounded-lg shadow-lg">
                         </div>
                     </div>
                 </section>
@@ -1956,6 +1956,137 @@ graph TD
                     </div>
             </section>
 
+            <!-- 学习场景示例 -->
+            <section>
+                <section>
+                    <h3 class="gradient-text mb-6">学习场景：词根词缀可视化</h3>
+                    <div class="example-split">
+                        <div class="example-shot">
+                            <div>
+                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-graduation-cap mr-2 text-indigo-600"></i>学习需求：单词拆解与关联</h4>
+                                <p class="text-lg text-gray-600 mb-4">输入单词 <code class="text-2xl px-3 py-1 bg-blue-100 text-blue-700 rounded">biology</code>，AI 自动分析词根词缀，生成知识图谱帮助记忆。</p>
+                            </div>
+                            <div class="code-panel" style="background: #1a202c; color: #cbd5f5; max-height: none;">
+<pre><code style="background: transparent; color: #cbd5f5;">提示词：
+请帮我分析单词 "biology" 的词根词缀构成，
+并生成一个 Mermaid mindmap 思维导图。
+
+要求：
+1. 展示词根 bio- 和词缀 -logy 的含义
+2. 列举使用相同词根/词缀的其他单词
+3. 帮助理解和记忆单词家族
+
+请输出 Mermaid 代码。</code></pre>
+                            </div>
+                            <div class="mt-4 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border-l-4 border-purple-500">
+                                <p class="text-base text-gray-700">
+                                    <i class="fas fa-lightbulb mr-2 text-yellow-500"></i>
+                                    <strong>应用价值：</strong>通过可视化词根词缀，帮助学习者快速掌握单词构成规律，举一反三记忆整个单词家族。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="example-diagram">
+                            <h4 class="text-xl font-bold"><i class="fas fa-brain mr-2 text-purple-600"></i>AI 生成的词根词缀思维导图</h4>
+                            <div class="mermaid" style="font-size: 0.95em;">
+mindmap
+  root((biology<br/>生物学))
+    词根：bio-
+      含义：life 生命
+      相关单词
+        biography 传记
+        biochemistry 生物化学
+        biosphere 生物圈
+        antibiotic 抗生素
+        symbiosis 共生
+    词缀：-logy
+      含义：study of 学科
+      相关单词
+        psychology 心理学
+        geology 地质学
+        sociology 社会学
+        technology 技术
+        ecology 生态学
+    核心含义
+      生命的研究
+      研究生物的科学
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="gradient-text mb-6">学习场景：内容总结与结构化</h3>
+                    <div class="example-split">
+                        <div class="example-shot">
+                            <div>
+                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-newspaper mr-2 text-blue-600"></i>学习需求：快速理解文章核心</h4>
+                                <p class="text-lg text-gray-600 mb-4">输入文章URL，AI 自动提取内容并按金字塔原理生成结构化思维导图。</p>
+                            </div>
+                            <div class="code-panel" style="background: #1a202c; color: #cbd5f5; max-height: none;">
+<pre><code style="background: transparent; color: #cbd5f5;">提示词：
+请阅读以下文章：
+@https://www.ruanyifeng.com/blog/2016/05/time-management.html
+
+要求：
+1. 使用金字塔原理总结文章核心观点
+2. 第一层：核心结论（1个）
+3. 第二层：主要论点（3-4个）
+4. 第三层：支撑细节和案例
+5. 生成 Mermaid mindmap 思维导图
+
+请输出 Mermaid 代码。</code></pre>
+                            </div>
+                            <div class="mt-4 p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-lg border-l-4 border-green-500">
+                                <p class="text-base text-gray-700">
+                                    <i class="fas fa-lightbulb mr-2 text-yellow-500"></i>
+                                    <strong>应用价值：</strong>快速提取长文关键信息，按逻辑层次梳理知识结构，提升阅读效率和理解深度。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="example-diagram">
+                            <h4 class="text-xl font-bold"><i class="fas fa-sitemap mr-2 text-green-600"></i>AI 生成的金字塔结构图</h4>
+                            <div class="mermaid" style="font-size: 0.88em;">
+mindmap
+  root((时间管理的本质<br/>优化决策质量))
+    一、时间的两个维度
+      时间量是恒定的
+        每人每天24小时
+        无法增加时间总量
+      时间质量可优化
+        做正确的事
+        提升单位时间价值
+    二、效率陷阱
+      忙碌≠高效
+        机械重复工作
+        缺乏思考时间
+      关注产出而非投入
+        结果导向
+        避免伪工作
+    三、优先级法则
+      重要紧急矩阵
+        重要且紧急：立即做
+        重要不紧急：计划做
+        紧急不重要：授权做
+        都不是：不做
+      80/20原则
+        20%的事产生80%的价值
+        聚焦高价值任务
+    四、实践方法
+      番茄工作法
+        25分钟专注
+        5分钟休息
+      时间记录
+        记录时间开销
+        分析优化空间
+      批量处理
+        相似任务集中做
+        减少切换成本
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
             <!-- 第七部分：多一个例子 -->
             <section>
                 <section data-background-gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
@@ -2065,12 +2196,7 @@ gitGraph
             <!-- 结束页 -->
             <section data-background-gradient="linear-gradient(135deg, #257FD5 0%, #1a5fa6 100%)">
                 <div class="text-center text-white">
-                    <h2 class="text-6xl font-bold mb-6">感谢观看</h2>
-                    <p class="text-3xl mb-8">Questions & Answers</p>
-                    <div class="text-xl">
-                        <i class="fas fa-envelope mr-3"></i>联系方式
-                        <p class="mt-3 opacity-90">欢迎交流与合作</p>
-                    </div>
+                    <h2 class="text-6xl font-bold mb-6">感谢观看</h2> 
                     <div class="mt-12">
                         <i class="fas fa-heart text-5xl animate-pulse" style="color: #FF6B35;"></i>
                     </div>
