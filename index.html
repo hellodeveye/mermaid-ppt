@@ -840,8 +840,12 @@
             margin: 0;
             background: transparent;
             box-shadow: none;
-            overflow: visible !important;
+            overflow-x: auto;
+            overflow-y: visible;
             width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            word-break: break-all;
         }
         
         .code-panel code {
@@ -850,7 +854,10 @@
             font-size: 0.75em;
             line-height: 1.6;
             display: block;
-            overflow: visible !important;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow-wrap: break-word;
         }
 
         .example-split {
@@ -1912,46 +1919,35 @@ graph TD
 
                 <section>
                     <h3 class="gradient-text mb-6">项目经理示例</h3>
-                    <div class="example-split">
-                        <div class="example-shot">
-                            <div>
-                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-sliders-h mr-2 text-yellow-500"></i>提示词：生成项目甘特图</h4>
-                                <p class="text-lg text-gray-600">输入阶段、时长、依赖等信息，AI 自动输出甘特图并同步排期。</p>
-                            </div>
-                            <img src="产品-mermaid-2.png" alt="项目经理示例界面">
-                            <p class="text-sm text-gray-500">示例：自然语言描述里程碑→AI 解析→生成可编辑的项目计划。</p>
-                        </div>
-                        <div class="example-diagram">
-                            <h4 class="text-xl font-bold"><i class="fas fa-chart-gantt mr-2 text-yellow-600"></i>Mermaid 甘特图</h4>
-                            <div class="mermaid" style="font-size: 0.8em;">
-                                gantt
-                                    title AI项目迭代计划
-                                    dateFormat YYYY-MM-DD
-                                    section 规划阶段
-                                    需求调研      :a1, 2025-03-01, 7d
-                                    方案评审      :after a1, 3d
-                                    section 执行阶段
-                                    架构设计      :2025-03-11, 5d
-                                    开发迭代      :2025-03-13, 15d
-                                    section 测试发布
-                                    自动化测试    :2025-03-28, 7d
-                                    正式上线      :2025-04-05, 2d
-                            </div>
-                        </div>
+                    <div class="card card-left">
+                        <h4 class="text-2xl font-bold mb-4"><i class="fas fa-sliders-h mr-2 text-yellow-500"></i>提示词：生成项目甘特图</h4>
+                        <p class="text-lg text-gray-600">输入阶段、时长、依赖等信息，AI 自动输出甘特图并同步排期。</p>
+                            <div class="code-panel">
+                                <pre>
+                                    <code>
+===
+请帮我使用 Mermaid 语法生成一个甘特图，标题为『AI项目迭代计划』，时间格式为 YYYY-MM-DD。甘特图分为三个阶段：规划阶段、执行阶段和测试发布。
+具体任务如下：
+规划阶段
+需求调研：从 2025-03-01 开始，持续 7 天
+方案评审：在需求调研之后，持续 3 天
+执行阶段
+架构设计：从 2025-03-11 开始，持续 5 天
+开发迭代：从 2025-03-13 开始，持续 15 天
+测试发布
+自动化测试：从 2025-03-28 开始，持续 7 天
+正式上线：第 2 天上线
+请输出一段 Mermaid 代码块，将我的需求转化为甘特图。
+                                    </code>
+                            </pre>
                     </div>
                 </section>
             </section>
 
             <section>
-                <h3 class="gradient-text mb-6">项目经理</h3>
+                <h3 class="gradient-text mb-6">项目经理示例</h3>
                     <div class="mermaid" style="font-size: 0.8em;">
                         gantt
-                            title AI项目迭代计划
-                            dateFormat YYYY-MM-DD
-                            section 规划阶段
-                            需求调研      :a1, 2025-03-01, 7d
-                            方案评审      :after a1, 3d
-                            section 执行阶段
                             架构设计      :2025-03-11, 5d
                             开发迭代      :2025-03-13, 15d
                             section 测试发布
