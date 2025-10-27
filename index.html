@@ -545,6 +545,14 @@
             align-items: center;
             justify-content: center;
             overflow: visible;
+            cursor: zoom-in;
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .mermaid:hover {
+            box-shadow: 0 8px 30px rgba(37, 127, 213, 0.15);
+            transform: translateY(-2px);
         }
         
         /* Mermaid SVG容器 */
@@ -553,6 +561,186 @@
             max-height: 60vh;
             height: auto;
             width: 100% !important;
+        }
+        
+        /* ========================================
+           灯箱效果样式
+        ======================================== */
+        .mermaid-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .mermaid-lightbox.active {
+            display: flex;
+        }
+        
+        .mermaid-lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            background: white;
+            border-radius: 16px;
+            padding: 4rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: visible;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInScale 0.3s ease forwards;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .mermaid-lightbox-content .mermaid-lightbox-inner {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .mermaid-lightbox-content {
+            cursor: grab;
+        }
+        
+        .mermaid-lightbox-content:active {
+            cursor: grabbing;
+        }
+        
+        .mermaid-lightbox-content svg {
+            display: block !important;
+            transform-origin: center center;
+            pointer-events: none; /* 让拖拽事件在容器层处理 */
+        }
+        
+        .mermaid-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 53, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+        
+        .mermaid-lightbox-close:hover {
+            background: #FF6B35;
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .mermaid-lightbox-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(37, 127, 213, 0.95);
+            padding: 10px 15px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10001;
+        }
+        
+        .mermaid-lightbox-btn {
+            width: 36px;
+            height: 36px;
+            background: white;
+            color: #257FD5;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mermaid-lightbox-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.1);
+        }
+        
+        .mermaid-lightbox-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .mermaid-zoom-level {
+            color: white;
+            font-size: 0.9em;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            min-width: 60px;
+            justify-content: center;
+        }
+        
+        .mermaid-keyboard-hint {
+            position: absolute;
+            bottom: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            opacity: 0;
+            animation: fadeInHint 0.5s ease 1s forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes fadeInHint {
+            0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            100% { opacity: 0.85; transform: translateX(-50%) translateY(0); }
+        }
+        
+        .mermaid-lightbox.active:hover .mermaid-keyboard-hint {
+            animation: fadeOutHint 0.3s ease forwards;
+        }
+        
+        @keyframes fadeOutHint {
+            to { opacity: 0; }
+        }
+        
+        .mermaid-keyboard-hint kbd {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: monospace;
+            font-size: 0.9em;
+            margin: 0 2px;
         }
 
        
@@ -1073,6 +1261,25 @@
     </style>
 </head>
 <body>
+    <!-- Mermaid 灯箱容器 -->
+    <div class="mermaid-lightbox" id="mermaidLightbox">
+        <button class="mermaid-lightbox-close" id="lightboxClose" title="关闭 (ESC 或 Q)">×</button>
+        <div class="mermaid-keyboard-hint">
+            <i class="fas fa-keyboard mr-2"></i>
+            快捷键: <kbd>ESC/Q</kbd> 关闭 | <kbd>+/-</kbd> 缩放 | <kbd>0/R</kbd> 重置
+        </div>
+        <div class="mermaid-lightbox-controls">
+            <button class="mermaid-lightbox-btn" id="zoomOut" title="缩小 (- 键)">
+                <i class="fas fa-minus"></i>
+            </button>
+            <span class="mermaid-zoom-level" id="zoomLevel">100%</span>
+            <button class="mermaid-lightbox-btn" id="zoomIn" title="放大 (+ 键)">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        <div class="mermaid-lightbox-content" id="lightboxContent"></div>
+    </div>
+
     <div class="reveal">
         <div class="slides">
             
@@ -2375,6 +2582,337 @@ gitGraph
         
         console.log('%c如果图表显示异常，在控制台运行: forceReinitMermaid()', 'color: #2EC4B6; font-size: 13px;');
         console.log('%c查看封面调试信息，在控制台运行: debugCover()', 'color: #2EC4B6; font-size: 13px;');
+        
+        // ========================================
+        // Mermaid 图表灯箱功能
+        // ========================================
+        (function() {
+            const lightbox = document.getElementById('mermaidLightbox');
+            const lightboxContent = document.getElementById('lightboxContent');
+            const closeBtn = document.getElementById('lightboxClose');
+            const zoomInBtn = document.getElementById('zoomIn');
+            const zoomOutBtn = document.getElementById('zoomOut');
+            const zoomLevelDisplay = document.getElementById('zoomLevel');
+            
+            let currentScale = 1;
+            let initialScale = 1; // 初始智能缩放
+            let currentSVG = null;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+            
+            // 更新缩放级别显示
+            function updateZoomDisplay() {
+                zoomLevelDisplay.textContent = Math.round(currentScale * 100) + '%';
+            }
+            
+            // 应用变换（缩放整个容器）
+            function applyTransform() {
+                if (lightboxContent) {
+                    // 应用 初始智能缩放 × 用户缩放 + 平移
+                    const finalScale = initialScale * currentScale;
+                    lightboxContent.style.transform = `scale(${finalScale}) translate(${translateX / finalScale}px, ${translateY / finalScale}px)`;
+                    lightboxContent.style.transformOrigin = 'center center';
+                    
+                    console.log('🔧 应用变换:', {
+                        初始缩放: initialScale,
+                        用户缩放: currentScale,
+                        最终缩放: finalScale.toFixed(2),
+                        平移: { x: translateX, y: translateY }
+                    });
+                }
+            }
+            
+            // 缩放功能
+            function zoom(delta) {
+                currentScale = Math.max(0.5, Math.min(3, currentScale + delta));
+                applyTransform();
+                updateZoomDisplay();
+            }
+            
+            // 重置缩放（保留初始的智能缩放，只重置用户操作）
+            function resetZoom() {
+                currentScale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform(); // 恢复到初始智能缩放
+                updateZoomDisplay();
+            }
+            
+            // 打开灯箱
+            function openLightbox(mermaidElement) {
+                const svg = mermaidElement.querySelector('svg');
+                if (!svg) {
+                    console.warn('未找到 SVG 元素');
+                    return;
+                }
+                
+                // 深度克隆 SVG（保留所有子元素和属性）
+                const clonedSVG = svg.cloneNode(true);
+                
+                // 创建包装器
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mermaid-lightbox-inner';
+                
+                // 清空并添加到灯箱
+                lightboxContent.innerHTML = '';
+                wrapper.appendChild(clonedSVG);
+                lightboxContent.appendChild(wrapper);
+                
+                // 获取原始尺寸信息
+                const viewBox = clonedSVG.getAttribute('viewBox');
+                const originalWidth = clonedSVG.getAttribute('width');
+                const originalHeight = clonedSVG.getAttribute('height');
+                
+                // 保留原始属性，只移除限制性的内联样式
+                const styleAttr = clonedSVG.getAttribute('style');
+                if (styleAttr) {
+                    clonedSVG.removeAttribute('style');
+                }
+                
+                // 如果 SVG 使用百分比或没有尺寸，根据 viewBox 计算固定尺寸
+                if (viewBox) {
+                    const [vbX, vbY, vbW, vbH] = viewBox.split(' ').map(Number);
+                    
+                    // 获取 SVG 的实际边界框（包括溢出的图例等）
+                    let actualWidth = vbW;
+                    let actualHeight = vbH;
+                    
+                    try {
+                        const bbox = svg.getBBox();
+                        // 如果边界框比 viewBox 大，使用边界框的尺寸
+                        if (bbox.x + bbox.width > vbW) {
+                            actualWidth = Math.ceil(bbox.x + bbox.width + 20); // 加点边距
+                        }
+                        if (bbox.y + bbox.height > vbH) {
+                            actualHeight = Math.ceil(bbox.y + bbox.height + 20);
+                        }
+                        
+                        // 更新 viewBox 以包含所有内容
+                        if (actualWidth > vbW || actualHeight > vbH) {
+                            clonedSVG.setAttribute('viewBox', `${vbX} ${vbY} ${actualWidth} ${actualHeight}`);
+                            console.log(`📦 扩展 viewBox: ${vbX} ${vbY} ${actualWidth} ${actualHeight}`);
+                        }
+                    } catch (e) {
+                        console.warn('无法获取 bbox:', e);
+                    }
+                    
+                    // 如果 width/height 是百分比或不存在，设置为实际尺寸
+                    if (!originalWidth || originalWidth.includes('%')) {
+                        clonedSVG.setAttribute('width', actualWidth);
+                    }
+                    if (!originalHeight || originalHeight.includes('%')) {
+                        clonedSVG.setAttribute('height', actualHeight);
+                    }
+                }
+                
+                // 设置 SVG 样式
+                clonedSVG.style.display = 'block';
+                clonedSVG.style.visibility = 'visible';
+                clonedSVG.style.width = 'auto';
+                clonedSVG.style.height = 'auto';
+                
+                currentSVG = clonedSVG;
+                
+                // 重置状态
+                resetZoom();
+                
+                // 显示灯箱
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // 使用 requestAnimationFrame 确保 DOM 完全渲染后再计算尺寸
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        const contentBox = lightboxContent;
+                        
+                        // 先让容器完全展开（移除动画）
+                        contentBox.style.animation = 'none';
+                        contentBox.style.opacity = '1';
+                        contentBox.style.transform = 'scale(1)';
+                        
+                        // 再次使用 requestAnimationFrame 确保渲染
+                        requestAnimationFrame(() => {
+                            const contentRect = contentBox.getBoundingClientRect();
+                            
+                            // 计算可用空间（留出一些边距）
+                            const maxAvailableWidth = window.innerWidth * 0.92;
+                            const maxAvailableHeight = window.innerHeight * 0.85;
+                            
+                            // 如果内容超出屏幕，计算需要的缩放比例
+                            let scale = 1;
+                            if (contentRect.width > maxAvailableWidth || contentRect.height > maxAvailableHeight) {
+                                const scaleX = maxAvailableWidth / contentRect.width;
+                                const scaleY = maxAvailableHeight / contentRect.height;
+                                scale = Math.min(scaleX, scaleY, 0.95); // 最多缩小到 95%
+                                console.log(`📐 内容超出屏幕，应用缩放: ${(scale * 100).toFixed(1)}%`);
+                            }
+                            
+                            // 保存初始缩放值（作用域变量）
+                            initialScale = scale;
+                            
+                            // 应用初始缩放
+                            contentBox.style.transform = `scale(${initialScale})`;
+                            contentBox.style.transformOrigin = 'center center';
+                            
+                            console.log('🔍 灯箱已打开', {
+                                SVG尺寸: {
+                                    width: clonedSVG.getAttribute('width'),
+                                    height: clonedSVG.getAttribute('height'),
+                                    viewBox: clonedSVG.getAttribute('viewBox')
+                                },
+                                容器尺寸: {
+                                    width: Math.round(contentRect.width),
+                                    height: Math.round(contentRect.height)
+                                },
+                                容器缩放: `${(scale * 100).toFixed(1)}%`,
+                                可用空间: {
+                                    width: Math.round(maxAvailableWidth),
+                                    height: Math.round(maxAvailableHeight)
+                                },
+                                需要缩放: contentRect.width > maxAvailableWidth || contentRect.height > maxAvailableHeight
+                            });
+                        });
+                    });
+                });
+            }
+            
+            // 关闭灯箱
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                lightboxContent.innerHTML = '';
+                lightboxContent.style.transform = ''; // 重置容器缩放
+                
+                // 重置所有状态
+                currentSVG = null;
+                currentScale = 1;
+                initialScale = 1;
+                translateX = 0;
+                translateY = 0;
+                
+                console.log('✅ 灯箱已关闭');
+            }
+            
+            // 拖拽功能
+            lightboxContent.addEventListener('mousedown', (e) => {
+                // 避免在按钮上触发拖拽
+                if (e.target.closest('.mermaid-lightbox-controls') || 
+                    e.target.closest('.mermaid-lightbox-close')) {
+                    return;
+                }
+                
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    translateX = e.clientX - startX;
+                    translateY = e.clientY - startY;
+                    applyTransform();
+                    e.preventDefault();
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            // 滚轮缩放
+            lightboxContent.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                zoom(delta);
+            });
+            
+            // 按钮事件
+            zoomInBtn.addEventListener('click', () => zoom(0.2));
+            zoomOutBtn.addEventListener('click', () => zoom(-0.2));
+            closeBtn.addEventListener('click', closeLightbox);
+            
+            // 点击背景关闭
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            // 键盘快捷键（优先级处理，避免与 RevealJS 冲突）
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                
+                switch(e.key) {
+                    case 'Escape':  // ESC 关闭
+                    case 'q':       // Q 键关闭（备选）
+                    case 'Q':
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
+                        closeLightbox();
+                        break;
+                    case '+':       // + 键放大
+                    case '=':
+                        e.preventDefault();
+                        zoom(0.2);
+                        break;
+                    case '-':       // - 键缩小
+                    case '_':
+                        e.preventDefault();
+                        zoom(-0.2);
+                        break;
+                    case '0':       // 0 键重置
+                    case 'r':       // R 键重置
+                    case 'R':
+                        e.preventDefault();
+                        resetZoom();
+                        break;
+                }
+            }, true); // 使用捕获阶段，优先于 RevealJS 处理
+            
+            // 为所有 Mermaid 图表添加点击事件
+            function initMermaidLightbox() {
+                const mermaidElements = document.querySelectorAll('.mermaid');
+                mermaidElements.forEach(element => {
+                    // 移除旧的事件监听器（如果有）
+                    element.replaceWith(element.cloneNode(true));
+                });
+                
+                // 重新获取元素并添加事件
+                document.querySelectorAll('.mermaid').forEach(element => {
+                    element.addEventListener('click', function(e) {
+                        // 避免在代码面板中的 mermaid 代码块触发
+                        if (!this.closest('.code-panel')) {
+                            openLightbox(this);
+                            e.stopPropagation();
+                        }
+                    });
+                });
+                
+                console.log('✅ 已为', document.querySelectorAll('.mermaid').length, '个 Mermaid 图表添加灯箱功能');
+            }
+            
+            // 页面加载完成后初始化
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMermaidLightbox);
+            } else {
+                initMermaidLightbox();
+            }
+            
+            // 幻灯片切换时重新初始化
+            if (typeof Reveal !== 'undefined') {
+                Reveal.on('slidechanged', () => {
+                    setTimeout(initMermaidLightbox, 300);
+                });
+            }
+            
+            // 暴露全局函数，方便调试和手动重新初始化
+            window.initMermaidLightbox = initMermaidLightbox;
+        })();
+        
+        console.log('%c🔍 灯箱功能已启用：点击任意 Mermaid 图表可全屏查看', 'color: #43e97b; font-size: 14px; font-weight: bold;');
+        console.log('%c快捷键：ESC/Q 关闭 | +/- 缩放 | 0/R 重置 | 滚轮缩放 | 拖拽移动', 'color: #2EC4B6; font-size: 12px;');
     </script>
 </body>
 </html>
