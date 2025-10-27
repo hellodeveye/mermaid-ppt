@@ -2294,57 +2294,66 @@ mindmap
 
             <!-- 第七部分：多一个例子 -->
             <section>
-                <section data-background-gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
+                <!-- 子页面1: 标题页 -->
+                <section data-background-gradient="linear-gradient(135deg, #fa709a 0%, #fee140 100%)">
                     <h2 class="text-white">
                         <i class="fas fa-plus-circle mr-3"></i>多一个例子
                     </h2>
-                    <p class="text-white text-2xl mt-8">让图表动起来</p>
+                    <p class="text-white text-2xl mt-8">MCP 生态的更多可能</p>
+                    <aside class="notes">
+                        这一节我们来聊聊基于 MCP 能做什么更多的事情。
+                    </aside>
                 </section>
 
+                <!-- 子页面3: 受 Mermaid 启发 - 思维导图工具 -->
                 <section>
-                    <h3 class="gradient-text mb-6">动态图表：Git 分支可视化</h3>
-                    <div class="code-render-split">
-                        <div class="code-panel">
-                            <pre><code class="language-mermaid">
-gitGraph
-    commit
-    branch featureA
-    checkout featureA
-    commit
-    commit
-    checkout main
-    branch featureB
-    checkout featureB
-    commit
-    checkout main
-    merge featureA
-    checkout featureB
-    commit
-    checkout main
-    merge featureB
-                            </code></pre>
+                    <h3 class="gradient-text mb-6">受 Mermaid 启发</h3>
+                    <div class="card card-left" style="max-width: 900px; margin: 0 auto;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <h4 class="text-2xl font-bold mb-3">
+                                <i class="fas fa-sitemap mr-3" style="color: #257FD5;"></i>思维导图工具
+                            </h4>
+                            <p class="text-lg text-gray-600">文本驱动的思维导图生成，原生支持 MCP 协议，与 AI 无缝协作</p>
                         </div>
-                        <div class="render-panel">
-                            <div class="mermaid">
-gitGraph
-    commit
-    branch featureA
-    checkout featureA
-    commit
-    commit
-    checkout main
-    branch featureB
-    checkout featureB
-    commit
-    checkout main
-    merge featureA
-    checkout featureB
-    commit
-    checkout main
-    merge featureB
-                            </div>
-                        </div>
+                        <img src="mindmap.png" alt="思维导图工具界面" class="rounded-lg shadow-xl" style="width: 100%; border: 2px solid #e2e8f0;">
                     </div>
+                    <aside class="notes">
+                        受 Mermaid 启发，我开发了一个支持 MCP 的思维导图工具。
+                    </aside>
+                </section>
+
+                <!-- 子页面4: 再造一个轮子 - 聊天机器人 -->
+                <section>
+                    <h3 class="gradient-text mb-6">再造一个轮子</h3>
+                    <div class="card card-left" style="max-width: 900px; margin: 0 auto;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <h4 class="text-2xl font-bold mb-3">
+                                <i class="fas fa-robot mr-3" style="color: #fa709a;"></i>支持 MCP 的 AI 聊天机器人
+                            </h4>
+                            <p class="text-lg text-gray-600">集成多种能力：思维导图生成、网页抓取、数据提取...</p>
+                        </div>
+                        <img src="bot-1.png" alt="AI 聊天机器人界面" class="rounded-lg shadow-xl" style="width: 100%; border: 2px solid #e2e8f0;">
+                    </div>
+                    <aside class="notes">
+                        然后我又开发了一个支持 MCP 的聊天机器人，集成了多种实用能力。
+                    </aside>
+                </section>
+
+                <!-- 子页面5: 基于 MCP，让工具互联 -->
+                <section>
+                    <h3 class="gradient-text mb-6">基于 MCP，让工具互联</h3>
+                    <div class="card card-left" style="max-width: 900px; margin: 0 auto;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <h4 class="text-2xl font-bold mb-3">
+                                <i class="fas fa-link mr-3" style="color: #2EC4B6;"></i>AI 从网站抓取信息，自动生成思维导图
+                            </h4>
+                            <p class="text-lg text-gray-600">思维导图与机器人互联，更多工具接入，创造无限可能</p>
+                        </div>
+                        <img src="bot-2.png" alt="工具互联示例" class="rounded-lg shadow-xl" style="width: 100%; border: 2px solid #e2e8f0;">
+                    </div>
+                    <aside class="notes">
+                        基于 MCP 协议，这些工具可以互联互通，创造出无限可能。
+                    </aside>
                 </section>
             </section>
 
@@ -2384,9 +2393,9 @@ gitGraph
                         <div class="card">
                             <h4 class="text-xl font-bold mb-3">
                                 <span class="text-4xl mr-3" style="color: #43e97b;">04</span>
-                                光明前景
+                                开放协作
                             </h4>
-                            <p class="text-gray-600">持续创新，未来充满无限可能</p>
+                            <p class="text-gray-600">基于 MCP 协议，让更多工具连接协作</p>
                         </div>
                     </div>
                 </section>
