@@ -1376,7 +1376,7 @@
                     <h2 class="text-white">
                         <i class="fas fa-users-slash mr-3"></i>协作的痛点
                     </h2>
-                    <p class="text-white text-2xl mt-8">图表协作中的“鸡同鸭讲”</p>
+                    <p class="text-white text-2xl mt-8">图表协作中的"鸡同鸭讲"</p>
                 </section>
 
                 <section>
@@ -1397,8 +1397,8 @@
                         <div class="card card-left">
                             <div class="badge badge-accent" style="align-self: flex-start;">赶工派</div>
                             <img src="我们的图为什么不一样-3.png" class="rounded-lg shadow-md mb-4" alt="临时赶工的流程图">
-                            <h4 class="text-xl font-bold mb-3">赶死线的“差不多”</h4>
-                            <p class="text-base text-gray-600">箭头随缘、字号随机，只能表达“差不多”意思，后续讨论很难落到细节。</p>
+                            <h4 class="text-xl font-bold mb-3">赶死线的"差不多"</h4>
+                            <p class="text-base text-gray-600">箭头随缘、字号随机，只能表达"差不多"意思，后续讨论很难落到细节。</p>
                         </div>
                     </div>
                 </section>
@@ -1407,7 +1407,7 @@
                     <h3 class="gradient-text mb-6">这些图到底哪里不对？</h3>
                     <div class="card card-left">
                         <h4 class="text-2xl font-bold mb-4">
-                            <i class="fas fa-exclamation-circle mr-2 text-orange-500"></i>三个“不统一”带来的隐形成本
+                            <i class="fas fa-exclamation-circle mr-2 text-orange-500"></i>三个"不统一"带来的隐形成本
                         </h4>
                         <ul class="text-lg">
                             <li><i class="fas fa-palette mr-2 text-purple-600"></i>风格不统一：每次评审像在看不同项目，团队沟通缺少共同的视觉语言。</li>
@@ -1416,7 +1416,7 @@
                         </ul>
                     </div>
                     <aside class="notes">
-                        总结痛点：风格、语义、维护三个维度全乱套，为引入“标准化”埋点。
+                        总结痛点：风格、语义、维护三个维度全乱套，为引入"标准化"埋点。
                     </aside>
                 </section>
 
@@ -1425,7 +1425,7 @@
                     <div class="grid-2 text-left">
                         <div>
                             <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas fa-code mr-2 text-blue-600"></i>用“代码”画图
+                                <i class="fas fa-code mr-2 text-blue-600"></i>用"代码"画图
                             </h4>
                             <ul class="text-lg">
                                 <li><i class="fas fa-check-circle mr-2"></i>标准化：统一的语法，统一的风格</li>
@@ -1445,7 +1445,7 @@
                     <h3 class="gradient-text mb-6">协作的理想状态</h3>
                     <div class="card">
                         <h4 class="text-2xl font-bold mb-4">
-                            <i class="fas fa-handshake mr-2 text-green-600"></i>统一的“图语言”
+                            <i class="fas fa-handshake mr-2 text-green-600"></i>统一的"图语言"
                         </h4>
                         <p class="text-lg">我们需要一种工具，能够：</p>
                         <ul class="text-lg mt-4">
@@ -2052,7 +2052,7 @@ classDiagram
                                 <p class="text-lg text-gray-600">上传用户与企微系统关系示意图，让 AI 自动抽取节点与连线，生成 Mermaid 拓扑图。</p>
                             </div>
                             <img src="研发-source-1.png" alt="研发示例源图">
-                            <p class="text-sm text-gray-500">示例：AI 解读图中“用户-企微-应用”等多方关系，自动输出一致的关系图。</p>
+                            <p class="text-sm text-gray-500">示例：AI 解读图中"用户-企微-应用"等多方关系，自动输出一致的关系图。</p>
                         </div>
                         <div class="example-diagram">
                             <h4 class="text-xl font-bold"><i class="fas fa-project-diagram mr-2 text-indigo-500"></i>Mermaid 拓扑图</h4>
@@ -2155,6 +2155,12 @@ graph TD
                 <h3 class="gradient-text mb-6">项目经理示例</h3>
                     <div class="mermaid" style="font-size: 0.8em;">
                         gantt
+                            title AI项目迭代计划
+                            dateFormat YYYY-MM-DD
+                            section 规划阶段
+                            需求调研    :2025-03-01, 7d
+                            方案评审    :after 2025-03-01, 3d
+                            section 执行阶段
                             架构设计      :2025-03-11, 5d
                             开发迭代      :2025-03-13, 15d
                             section 测试发布
