@@ -2085,24 +2085,31 @@ graph TD
                     <div class="example-split">
                         <div class="example-shot">
                             <div>
-                                <h4 class="text-xl font-bold mb-2"><i class="fas fa-clipboard-check mr-2 text-green-600"></i>提示词：生成测试流程图</h4>
-                                <p class="text-lg text-gray-600">输入回归测试需求，AI 自动梳理测试步骤并生成覆盖率报告。</p>
+                                <h4 class="text-lg font-bold mb-2"><i class="fas fa-chart-bar mr-2 text-green-600"></i>提示词：生成测试报告图表</h4>
+                                <p class="text-base text-gray-600 mb-3">基于迭代缺陷列表文件，输出可视化图表</p>
                             </div>
-                            <img src="测试示例源.png" alt="测试工程师示例源图">
-                            <p class="text-sm text-gray-500">示例：AI 解析需求变化后自动输出新的测试用例和执行顺序。</p>
+                            <div class="card" style="background: #f7fafc; padding: 1.2rem; text-align: left;">
+                                <h5 class="font-bold mb-2" style="font-size: 0.95em;">📄 缺陷数据文件：</h5>
+                                <div style="font-family: monospace; font-size: 0.8em; line-height: 1.5;">
+                                    <p style="margin: 0.3rem 0;">迭代1: 严重8, 一般12, 轻微15</p>
+                                    <p style="margin: 0.3rem 0;">迭代2: 严重5, 一般10, 轻微18</p>
+                                    <p style="margin: 0.3rem 0;">迭代3: 严重3, 一般6, 轻微10</p>
+                                    <p style="margin: 0.3rem 0;">迭代4: 严重1, 一般4, 轻微5</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2">AI 自动读取数据，生成可视化图表</p>
                         </div>
                         <div class="example-diagram">
-                            <h4 class="text-xl font-bold"><i class="fas fa-project-diagram mr-2 text-green-500"></i>Mermaid 流程图</h4>
-                            <div class="mermaid">
-graph TD
-    需求分析 --> 用例生成
-    用例生成 --> 用例库更新
-    用例库更新 --> 自动执行
-    自动执行 --> 覆盖率统计
-    自动执行 --> 缺陷收集
-    缺陷收集 --> 需求分析
-    覆盖率统计 --> 报告输出
+                            <h4 class="text-xl font-bold"><i class="fas fa-chart-column mr-2 text-green-500"></i>缺陷趋势分析</h4>
+                            <div class="mermaid" style="font-size: 0.9em;">
+xychart-beta
+    title "迭代缺陷趋势分析"
+    x-axis [Sprint1, Sprint2, Sprint3, Sprint4, Sprint5, Sprint6]
+    y-axis "Defects" 0 --> 40
+    bar [35, 33, 25, 19, 15, 10]
+    line [8, 5, 3, 2, 1, 1]
                             </div>
+                            <p class="text-sm text-gray-500 mt-3" style="text-align: center;">柱状图：总缺陷数 | 折线图：严重缺陷数 - 质量持续提升</p>
                         </div>
                     </div>
                 </section>
